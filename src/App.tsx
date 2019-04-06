@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// import logo from "./logo.svg";
 import "./App.scss";
 import { PageWrapper } from "./components/templates/page-wrapper/page-wrapper.component";
 import Home from "./pages/home";
-import AddPlant from "./pages/add-plant";
+import { AddPlant } from "./pages/add-plant/add-plant";
 import Garden from "./pages/garden";
 
 class App extends Component {

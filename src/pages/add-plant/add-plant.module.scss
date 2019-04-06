@@ -1,0 +1,18 @@
+.plantListWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.plantTile {
+  width: 40%;
+  height: 100px;
+  padding: 30px;
+  margin: 3px;
+  background-color: gray;
+  div {
+    font-size: 15px;
+    div {
+      font-weight: 900;
+      display: block;
+    }
+  }
+}
