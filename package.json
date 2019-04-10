@@ -15,8 +15,10 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
+    "firebase": "^5.9.2",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",
+    "graphql-yoga": "^1.17.4",
     "mongoose": "^5.4.22",
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.10",
@@ -28,10 +30,7 @@
     "typescript": "^3.4.2"
   },
   "scripts": {
-    "start": "npm-run-all --parallel watch:server start:web",
-    "start:web": "react-scripts start",
-    "start:server": "node src/server",
-    "watch:server": "nodemon --watch src/server src/server",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

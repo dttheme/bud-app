@@ -4,7 +4,7 @@ import "./App.scss";
 import { PageWrapper } from "./components/templates/page-wrapper/page-wrapper.component";
 import Home from "./pages/home";
 import { AddPlant } from "./pages/add-plant/add-plant";
-import Garden from "./pages/garden";
+import Garden from "./pages/garden/garden";
 
 class App extends Component {
   render() {
