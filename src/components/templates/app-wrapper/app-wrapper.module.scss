@@ -1,5 +1,5 @@
 @import "../../../styles/colors";
-@import "../../../styles/font_sizes";
+@import "../../../styles/font_styles";
 
 header {
   overflow: hidden;
@@ -13,6 +13,7 @@ header {
   align-items: center;
   box-shadow: 2px 2px 15px $dark-grey;
   border-bottom: 1px solid $sunny;
+  margin-bottom: 20px;
   span {
     width: 20%;
     display: flex;

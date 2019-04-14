@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./add-user-plant.module.scss";
 import { Link } from "react-router-dom";
 
 export const UserPlantAdd = () => {
@@ -6,7 +7,10 @@ export const UserPlantAdd = () => {
     <div>
       <Link to={`/add-plant`}>Back to Plant Search</Link>
       <form action="">
-        <input type="text" />
+        <div className={styles.formRow}>
+          <input type="text" placeholder="Common Name" />
+          <input type="text" placeholder="Scientific Name" />
+        </div>
         <button>Add to Garden</button>
       </form>
     </div>

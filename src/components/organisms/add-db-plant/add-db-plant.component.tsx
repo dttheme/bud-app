@@ -87,7 +87,7 @@ export const DbPlantSearch = (props: DbPlantSearchProps) => {
         <div className={styles.plantListWrapper}>
           {searchResultsLoaded && responseData.length == 0
             ? SorryNotFound({ tryAgain })
-            : PlantList({ responseData, searchResultsLoaded })}
+            : PlantList({ responseData, searchResultsLoaded, type: "search" })}
         </div>
       )}
       <DbPagination

@@ -29,7 +29,7 @@ class Garden extends React.Component<{}, GardenState> {
         <PageHeading title="My Garden" />
         <div className={styles.gardenGrid}>
           {garden.map(plant => {
-            return <PlantTile key={plant.id} {...plant} />;
+            return <PlantTile key={plant.id} type="garden" {...plant} />;
           })}
         </div>
       </div>

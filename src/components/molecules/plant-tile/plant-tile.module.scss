@@ -1,23 +1,35 @@
+@import "../../../styles/colors";
+@import "../../../styles/font_styles";
+
 .plantTile {
   width: 40%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: gray;
-  div {
-    font-size: 15px;
-    div {
-      font-weight: 900;
-      display: block;
-    }
-  }
-}
-.plantTileButtonWrapper {
+  margin: 20px;
+  background-color: $smoke;
+  border-radius: 5px;
+  border: 0.5px solid $dark-green;
+  box-shadow: 2px 2px 3px $dark-grey;
   display: flex;
   flex-direction: column;
+}
+.tileTitle {
+  padding: 20px 0;
+  border-radius: 5px 5px 0 0;
+  background-color: $dark-green;
+  color: $smoke;
+  font-family: $helvetica;
+}
+.plantTileButtonWrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  button {
+    margin: 10px;
+  }
 }
 
 @media (max-width: 30rem) {
   .plantTile {
     width: 100%;
+    max-width: 335px;
   }
 }

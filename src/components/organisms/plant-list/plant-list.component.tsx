@@ -4,6 +4,7 @@ import styles from "./plant-list.module.scss";
 import { PlantTile } from "../../molecules/plant-tile/plant-tile.component";
 
 type PlantListProps = {
+  type: "search" | "garden";
   searchResultsLoaded: boolean;
   responseData: {
     slug: string;
@@ -16,7 +17,8 @@ type PlantListProps = {
 
 export const PlantList = ({
   responseData,
-  searchResultsLoaded
+  searchResultsLoaded,
+  type
 }: PlantListProps) => {
   const handleAddToGarden = plant => e => {
     e.preventDefault();
@@ -36,7 +38,11 @@ export const PlantList = ({
     responseData.map(plant => {
       return (
         <div className={styles.plantListWrapper}>
-          <PlantTile {...plant} addToGarden={handleAddToGarden(plant)} />
+          <PlantTile
+            {...plant}
+            type={type}
+            addToGarden={handleAddToGarden(plant)}
+          />
         </div>
       );
     })
