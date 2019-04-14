@@ -5,6 +5,7 @@ import { DbPlantSearch } from "../../components/organisms/add-db-plant/add-db-pl
 import { UserPlantAdd } from "../../components/organisms/add-user-plant/add-user-plant.component";
 import { Link } from "react-router-dom";
 import { PageHeading } from "../../components/atoms/page-header/page-header.component";
+import { Button } from "../../components/atoms/button/button.component";
 const mockResponse: any = [
   {
     slug: "hieracium-basileucum",
@@ -44,7 +45,7 @@ export type trefleResponseData = {
   slug: string;
   common_name: string;
   scientific_name: string;
-  plant_id: number;
+  id: string;
   user_id: number;
 }[];
 
@@ -101,6 +102,9 @@ export const AddPlantPage = () => {
   return (
     <div className={styles.addPlantWrapper}>
       <PageHeading title="Add a Plant" />
+      <div>
+        from the <a href="https://trefle.io/">Trefle Plant API</a>
+      </div>
       <>
         <DbPlantSearch
           tryAgain={tryAgain}
@@ -115,12 +119,14 @@ export const AddPlantPage = () => {
         />
         <br />
         {searchResultsLoaded ? (
-          <button>Return To Add A Plant</button>
+          <Link to={"/add-plant"}>
+            <Button>Return To Add A Plant</Button>
+          </Link>
         ) : (
           <>
             <div>OR</div>
             <Link to={`/user-add`}>
-              <button>Add Your Own Plant</button>
+              <Button>Add Your Own Plant</Button>
             </Link>
           </>
         )}

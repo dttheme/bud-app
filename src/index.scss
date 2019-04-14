@@ -1,10 +1,17 @@
 @import "../src/styles/colors";
 @import "../src/styles/font_styles";
 
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   overflow-x: hidden;
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
@@ -12,28 +19,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-button {
-  width: 50%;
-  max-width: 300px;
-  background-color: $dark-green;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 5px 3px 4px 1px $dark-grey;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: $light-grey;
-  padding: 10px 20px;
-}
-
 input {
   border: 3px solid $smoke;
   border-radius: 5px;
-  width: 80%;
+  padding: 10px;
+  font-size: $inputAndButton;
 }

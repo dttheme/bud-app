@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./add-db-plant.module.scss";
 import { PlantList } from "../plant-list/plant-list.component";
 import { trefleResponseData } from "../../../pages/add-plant/add-plant.page";
+import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
+import { Button } from "../../atoms/button/button.component";
 
 type DbPlantSearchProps = {
   searchResultsLoaded: boolean;
@@ -35,36 +37,35 @@ const DbPagination = ({
 }: dbPaginationProps) => (
   <>
     {pageNum > 0 ? (
-      <span
-        className={styles.paginationIcon}
+      <IconWrapper
+        ariaLabel="Previous results page"
         onClick={handlePaginationClick("decrement")}
       >
         👈
-      </span>
+      </IconWrapper>
     ) : null}
     {responseDataLength == 4 ? (
-      <span
-        className={styles.paginationIcon}
+      <IconWrapper
+        ariaLabel="Next results page"
         onClick={handlePaginationClick("increment")}
       >
         👉
-      </span>
+      </IconWrapper>
     ) : null}
   </>
 );
 
-export const DbPlantSearch = (props: DbPlantSearchProps) => {
-  const {
-    handleInputChange,
-    handleSearchClick,
-    isLoading,
-    queryString,
-    responseData,
-    searchResultsLoaded,
-    tryAgain,
-    pageNum,
-    handlePaginationClick
-  } = props;
+export const DbPlantSearch = ({
+  handleInputChange,
+  handleSearchClick,
+  isLoading,
+  queryString,
+  responseData,
+  searchResultsLoaded,
+  tryAgain,
+  pageNum,
+  handlePaginationClick
+}: DbPlantSearchProps) => {
   return (
     <>
       <form>
@@ -77,12 +78,19 @@ export const DbPlantSearch = (props: DbPlantSearchProps) => {
               value={queryString}
               onChange={e => handleInputChange(e.target.value)}
             />
-            <button onClick={handleSearchClick(queryString)}>Search</button>
+            <Button
+              className={styles.searchButton}
+              onClick={handleSearchClick(queryString)}
+            >
+              Search
+            </Button>
           </>
         )}
       </form>
       {isLoading ? (
-        <div className={styles.loadingFlower}>🌼</div>
+        <IconWrapper ariaLabel="Loading results...">
+          <div className={styles.loadingFlower}>🌼</div>
+        </IconWrapper>
       ) : (
         <div className={styles.plantListWrapper}>
           {searchResultsLoaded && responseData.length == 0

@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./app-wrapper.module.scss";
 import { Link } from "react-router-dom";
-import { Tooltip } from "../../molecules/tooltip/tooltip.component";
+import { Tooltip } from "../../atoms/tooltip/tooltip.component";
+import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -13,17 +14,27 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
         <span>
           <Link to="/add-plant" className={styles.navText}>
             <Tooltip text="Add Plant">
-              <span aria-label="add">➕</span>
+              <IconWrapper
+                ariaLabel="Add a plant"
+                className={styles.headerIcon}
+              >
+                <span aria-label="add">➕</span>
+              </IconWrapper>
             </Tooltip>
           </Link>
           <Link to="/garden" className={styles.navText}>
             <Tooltip text="Garden">
-              <span aria-label="garden">🌱</span>
+              <IconWrapper
+                ariaLabel="Go to your garden"
+                className={styles.headerIcon}
+              >
+                <span aria-label="garden">🌱</span>
+              </IconWrapper>
             </Tooltip>
           </Link>
         </span>
       </header>
-      <div className={styles.AppWrapper}>{children}</div>
+      <div className={styles.pageWrapper}>{children}</div>
     </>
   );
 };

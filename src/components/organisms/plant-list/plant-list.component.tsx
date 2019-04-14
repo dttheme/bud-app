@@ -1,18 +1,13 @@
 import React from "react";
-import firebase from "../../firebase";
+import firebase from "../../../firebase";
 import styles from "./plant-list.module.scss";
 import { PlantTile } from "../../molecules/plant-tile/plant-tile.component";
+import { trefleResponseData } from "../../../pages/add-plant/add-plant.page";
 
 type PlantListProps = {
   type: "search" | "garden";
   searchResultsLoaded: boolean;
-  responseData: {
-    slug: string;
-    common_name: string;
-    scientific_name: string;
-    plant_id: number;
-    user_id: number;
-  }[];
+  responseData: trefleResponseData;
 };
 
 export const PlantList = ({
@@ -20,10 +15,10 @@ export const PlantList = ({
   searchResultsLoaded,
   type
 }: PlantListProps) => {
-  const handleAddToGarden = plant => e => {
+  const db = firebase.firestore();
+  const addPlantToFirecloud = plant => e => {
     e.preventDefault();
-    const db = firebase.firestore();
-    const plantRef = db.collection("gardens").add({
+    db.collection("gardens").add({
       common_name: plant.common_name,
       scientific_name: plant.scientific_name,
       // trefle_id: plant.plant_id,
@@ -31,19 +26,23 @@ export const PlantList = ({
     });
     console.log("add to garden");
   };
+  const deletePlantFromFirecloud = plant => e => {
+    e.preventDefault();
+    db.collection("gardens");
+  };
   // const GET_PLANT_IMAGE = () => {};
 
   return (
     responseData &&
     responseData.map(plant => {
       return (
-        <div className={styles.plantListWrapper}>
-          <PlantTile
-            {...plant}
-            type={type}
-            addToGarden={handleAddToGarden(plant)}
-          />
-        </div>
+        <PlantTile
+          key={plant.id}
+          {...plant}
+          type={type}
+          addToFirecloud={addPlantToFirecloud(plant)}
+          removeFromFirecloud={deletePlantFromFirecloud(plant.id)}
+        />
       );
     })
   );

@@ -2,14 +2,13 @@
 @import "../../../styles/font_styles";
 
 .plantTile {
-  width: 40%;
-  margin: 20px;
-  background-color: $smoke;
+  background-color: #ffffff;
   border-radius: 5px;
   border: 0.5px solid $dark-green;
-  box-shadow: 2px 2px 3px $dark-grey;
+  box-shadow: 4px 4px 3px $smoke;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 .tileTitle {
   padding: 20px 0;
@@ -30,6 +29,5 @@
 @media (max-width: 30rem) {
   .plantTile {
     width: 100%;
-    max-width: 335px;
   }
 }

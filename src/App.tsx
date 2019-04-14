@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import history from "./history";
 import "./App.scss";
 import { AppWrapper } from "./components/templates/app-wrapper/app-wrapper.component";
 import Home from "./pages/home";
@@ -25,7 +26,7 @@ class App extends Component {
             Learn React
           </a>
         </header> */}
-        <Router>
+        <Router history={history}>
           <AppWrapper>
             <Route exact path="/" component={Home} />
             <Route path="/add-plant" component={AddPlantPage} />

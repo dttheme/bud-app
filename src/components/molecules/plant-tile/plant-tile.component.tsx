@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./plant-tile.module.scss";
 import { TileEntry } from "../../atoms/tile-entry/tile-entry.component";
+import { Button } from "../../atoms/button/button.component";
 
 type PlantTileProps = {
   type: "search" | "garden";
-  id?: string;
+  id: string;
   common_name: string;
   scientific_name: string;
   slug: string;
-  addToGarden: (props: Object) => void;
+  addToFirecloud: (props: Object) => void;
+  // removeFromFirecloud: (props: string) => void;
 };
+
+const AddedToGardenSuccessMessage = () => (
+  <div>Success! This plant has been added to your garden.</div>
+);
 export const PlantTile = (props: PlantTileProps) => {
-  const { common_name, scientific_name, slug, addToGarden, type } = props;
+  const [addedToGarden, setAddedToGarden] = useState(false);
+  const {
+    common_name,
+    scientific_name,
+    slug,
+    id,
+    addToFirecloud,
+    type
+    // removeFromFirecloud
+  } = props;
+
+  const handleAddToGarden = () => {
+    addToFirecloud;
+    setAddedToGarden(true);
+  };
+
+  const handleDeleteFromGarden = () => {
+    // removeFromFirecloud(id);
+  };
   return (
-    <div key={slug} className={styles.plantTile}>
+    <div className={styles.plantTile}>
       <div className={styles.tileTitle}>
         {common_name && (
           <TileEntry valueTitle="Common Name" value={common_name} />
@@ -22,17 +46,19 @@ export const PlantTile = (props: PlantTileProps) => {
           <TileEntry valueTitle="Scientific Name" value={scientific_name} />
         )}
       </div>
-      <div className={styles.plantTileButtonWrapper}>
-        {type === "garden" ? null : (
-          <button type="submit" onClick={addToGarden}>
-            Add To Garden
-          </button>
-        )}
-        <button name="moreInfo" type="submit">
-          More Info
-        </button>
-        {type === "search" ? null : <button>Delete</button>}
-      </div>
+      {addedToGarden ? (
+        <AddedToGardenSuccessMessage />
+      ) : (
+        <div className={styles.plantTileButtonWrapper}>
+          {type === "garden" ? null : (
+            <Button onClick={handleAddToGarden}>Add To Garden</Button>
+          )}
+          <Button>More Info</Button>
+          {type === "search" ? null : (
+            <Button onClick={handleDeleteFromGarden}>Delete</Button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,14 @@
+@import "../../../styles/font_styles.scss";
+
 form {
-  width: 100%;
+  width: 60%;
   margin: 0 auto;
 }
 .formRow {
   display: flex;
+  flex-direction: column;
+  input {
+    padding: 10px;
+    font-size: $inputAndButton;
+  }
 }

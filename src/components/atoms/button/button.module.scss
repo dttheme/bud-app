@@ -1,0 +1,22 @@
+@import "../../../styles//colors";
+
+.buttonComponent {
+  width: 70%;
+  max-width: 300px;
+  background-color: $dark-green;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px 5px 2px $smoke;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: $light-grey;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+
+.buttonComponent:hover,
+.buttonComponent:active {
+  box-shadow: 2px 2px 2px $smoke;
+  color: #ffffff;
+}
