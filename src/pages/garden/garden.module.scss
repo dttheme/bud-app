@@ -1,3 +1,7 @@
+@import "../../styles//colors";
+
 .gardenGrid {
   display: flex;
+  flex-direction: column;
+  color: $dark-green;
 }

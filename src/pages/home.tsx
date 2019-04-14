@@ -1,8 +1,9 @@
 import * as React from "react";
+import { PageHeading } from "../components/atoms/page-header/page-header.component";
 
 class Home extends React.Component {
   render() {
-    return <h1>Home!</h1>;
+    return <PageHeading title="HOME!" />;
   }
 }
 

@@ -1,8 +1,13 @@
+@import "../src/styles/colors";
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
+  box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
+  color: $dark-grey;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +15,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  width: 50%;
+  max-width: 300px;
+  background-color: $dark-green;
+  opacity: 0.9;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px 3px 4px 1px $dark-grey;
+  font-size: 15px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: $light-grey;
+  padding: 10px 20px;
 }

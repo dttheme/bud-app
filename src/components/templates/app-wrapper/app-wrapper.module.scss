@@ -1,0 +1,40 @@
+@import "../../../styles/colors";
+@import "../../../styles/font_sizes";
+
+header {
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: $marigold;
+  padding-top: 7px;
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 2px 2px 15px $dark-grey;
+  border-bottom: 1px solid $sunny;
+  span {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+  }
+  h1 {
+    font-weight: 900;
+    font-size: $header;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-shadow: 5px 2px 1px $dark-grey;
+  }
+}
+.navLink {
+  text-decoration: none;
+  color: white;
+}
+.navLink:hover {
+  color: grey;
+}
+.AppWrapper {
+  width: 100vw;
+  text-align: center;
+  margin: 0 auto;
+}

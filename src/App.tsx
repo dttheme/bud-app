@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.scss";
-import { PageWrapper } from "./components/templates/page-wrapper/page-wrapper.component";
+import { AppWrapper } from "./components/templates/app-wrapper/app-wrapper.component";
 import Home from "./pages/home";
-import { AddPlant } from "./pages/add-plant/add-plant";
-import Garden from "./pages/garden/garden";
+import { AddPlantPage } from "./pages/add-plant/add-plant.page";
+import Garden from "./pages/garden/garden.component";
+import { UserPlantAdd } from "./components/organisms/add-user-plant/add-user-plant.component";
 
 class App extends Component {
   render() {
@@ -25,11 +26,12 @@ class App extends Component {
           </a>
         </header> */}
         <Router>
-          <PageWrapper>
+          <AppWrapper>
             <Route exact path="/" component={Home} />
-            <Route path="/add-plant" component={AddPlant} />
+            <Route path="/add-plant" component={AddPlantPage} />
             <Route path="/garden" component={Garden} />
-          </PageWrapper>
+            <Route path="/user-add" component={UserPlantAdd} />
+          </AppWrapper>
         </Router>
       </div>
     );

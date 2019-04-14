@@ -1,0 +1,12 @@
+.plantListWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 0 5px;
+}
+
+@media (min-width: 30rem) {
+  .plantListWrapper {
+    flex-direction: row;
+  }
+}

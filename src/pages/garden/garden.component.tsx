@@ -2,6 +2,7 @@ import * as React from "react";
 import { firestore } from "../../components/firebase";
 import { PlantTile } from "../../components/molecules/plant-tile/plant-tile.component";
 import styles from "./garden.module.scss";
+import { PageHeading } from "../../components/atoms/page-header/page-header.component";
 
 type GardenState = { garden: any };
 
@@ -25,7 +26,7 @@ class Garden extends React.Component<{}, GardenState> {
     console.log(garden);
     return (
       <div>
-        <h1>Garden!</h1>
+        <PageHeading title="My Garden" />
         <div className={styles.gardenGrid}>
           {garden.map(plant => {
             return <PlantTile key={plant.id} {...plant} />;

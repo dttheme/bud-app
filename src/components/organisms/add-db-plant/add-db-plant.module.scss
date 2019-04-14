@@ -1,0 +1,22 @@
+.paginationIcon {
+  font-size: 40px;
+  cursor: pointer;
+  margin: 0 40px;
+}
+.searchSorry {
+  font-size: 30px;
+}
+.loadingFlower {
+  margin-top: 20px;
+  font-size: 40px;
+  animation: rotation 2s infinite linear;
+  -webkit-animation: rotation 2s infinite linear;
+}
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}

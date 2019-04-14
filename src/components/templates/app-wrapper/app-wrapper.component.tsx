@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./page-wrapper.module.scss";
+import styles from "./app-wrapper.module.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "../../molecules/tooltip/tooltip.component";
 
-export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
+export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <header className={styles.header}>
@@ -23,7 +23,7 @@ export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
           </Link>
         </span>
       </header>
-      <div className={styles.pageWrapper}>{children}</div>
+      <div className={styles.AppWrapper}>{children}</div>
     </>
   );
 };
