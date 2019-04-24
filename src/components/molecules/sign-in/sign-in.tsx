@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { signInWithGoogle } from "../../../firebase";
 
 export const SignIn = () => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -31,7 +32,7 @@ export const SignIn = () => {
         onChange={handleChange}
       />
       <input type="submit" value="Sign In" />
-      <button>Sign In With Google</button>
+      <button onClick={signInWithGoogle}>Sign In With Google</button>
     </form>
   );
 };

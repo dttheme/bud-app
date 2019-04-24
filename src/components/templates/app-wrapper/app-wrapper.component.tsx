@@ -1,40 +1,54 @@
 import React, { createContext } from "react";
 import styles from "./app-wrapper.module.scss";
 import { Header } from "../../organisms/header/header.component";
-import { firestore } from "../../../firebase";
+import { firestore, auth } from "../../../firebase";
 import { collectIdsAndDocs } from "../../../utilities";
+import { plantDataType } from "../../../pages/add-plant/add-plant.page";
 
 type AppWrapperType = {
   children: React.ReactNode;
 };
 
-export const AppContext = createContext([{}]);
+type AppContextType = {
+  garden: plantDataType[];
+  user: {};
+};
+export const AppContext = createContext({} as AppContextType);
 
 export class AppWrapper extends React.Component<AppWrapperType> {
-  state = { garden: [{}], user: null };
+  state = {
+    garden: [{ id: "", slug: "", common_name: "", scientific_name: "" }],
+    user: {}
+  };
 
-  unsubscribe: any = null;
+  unsubscribeFromFirestore: any = null;
+  unsubscribeFromAuth: any = null;
 
   componentDidMount = async () => {
-    this.unsubscribe = firestore.collection("garden").onSnapshot(snapshot => {
-      const garden = snapshot.docs.map(collectIdsAndDocs);
-      this.setState({ garden });
+    this.unsubscribeFromFirestore = firestore
+      .collection("garden")
+      .onSnapshot(snapshot => {
+        const garden = snapshot.docs.map(collectIdsAndDocs);
+        this.setState({ garden });
+      });
+
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      console.log(user);
+      this.setState(prevState => ({ user, prevState }));
     });
   };
 
   componentWillUnmount = () => {
-    this.unsubscribe();
+    this.unsubscribeFromFirestore();
   };
 
   render() {
     return (
       <>
-        <Header />
-        <div className={styles.pageWrapper}>
-          <AppContext.Provider value={this.state.garden}>
-            {this.props.children}
-          </AppContext.Provider>
-        </div>
+        <AppContext.Provider value={this.state}>
+          <Header />
+          <div className={styles.pageWrapper}>{this.props.children}</div>
+        </AppContext.Provider>
       </>
     );
   }

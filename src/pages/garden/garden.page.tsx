@@ -6,10 +6,10 @@ class Garden extends React.Component {
   render() {
     return (
       <AppContext.Consumer>
-        {garden => (
+        {state => (
           <div>
             <h2>Garden</h2>
-            <PlantList type="garden" plantArray={garden as any} />
+            <PlantList type="garden" plantArray={state.garden} />
           </div>
         )}
       </AppContext.Consumer>
