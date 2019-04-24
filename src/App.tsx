@@ -5,7 +5,7 @@ import "./App.scss";
 import { AppWrapper } from "./components/templates/app-wrapper/app-wrapper.component";
 import Home from "./pages/home";
 import Garden from "./pages/garden/garden.page";
-import { AddPlantPage, plantDataType } from "./pages/add-plant/add-plant.page";
+import { AddPlantPage } from "./pages/add-plant/add-plant.page";
 import { UserPlantAdd } from "./components/organisms/add-user-plant/add-user-plant.component";
 
 const App = () => {

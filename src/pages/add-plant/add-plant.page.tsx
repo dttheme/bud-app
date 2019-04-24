@@ -40,13 +40,6 @@ import { Button } from "../../components/atoms/button/button.component";
 //   }
 // ];
 
-export type plantDataType = {
-  slug: string;
-  common_name: string;
-  scientific_name: string;
-  id: string;
-};
-
 export const AddPlantPage = () => {
   const [queryString, setQueryString] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +60,6 @@ export const AddPlantPage = () => {
       .then(response => {
         console.log(response.data);
         setResponseData(response.data);
-        // setResponseData(mockResponse);
       })
       .then(() => {
         setIsLoading(false);

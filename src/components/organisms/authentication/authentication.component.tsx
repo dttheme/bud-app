@@ -4,7 +4,6 @@ import { SignIn } from "../../molecules/sign-in/sign-in";
 import { ActiveUser } from "../../molecules/active-user/active-user.component";
 
 export const Authentication = ({ user }) => {
-  console.log(user);
   return (
     <>
       {user ? (

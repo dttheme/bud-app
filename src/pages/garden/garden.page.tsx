@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PlantList } from "../../components/templates/plant-list/plant-list";
+import { PlantList } from "../../components/templates/plant-list/plant-list.component";
 import { AppContext } from "../../components/templates/app-wrapper/app-wrapper.component";
 
 class Garden extends React.Component {
@@ -9,7 +9,7 @@ class Garden extends React.Component {
         {state => (
           <div>
             <h2>Garden</h2>
-            <PlantList type="garden" plantArray={state.garden} />
+            <PlantList type="garden" plantArray={state.plants} />
           </div>
         )}
       </AppContext.Consumer>

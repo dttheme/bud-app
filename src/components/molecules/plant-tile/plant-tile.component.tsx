@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { firestore } from "../../../firebase";
+import { firestore, auth } from "../../../firebase";
 import styles from "./plant-tile.module.scss";
 import { TileEntry } from "../../atoms/tile-entry/tile-entry.component";
 import { Button } from "../../atoms/button/button.component";
+import { UserDataType, PlantDataType } from "../../templates/app-wrapper/app-wrapper.component";
 
 type PlantTileProps = {
   type: "search" | "garden";
-  plant: {
-    id: string;
-    common_name?: string;
-    scientific_name?: string;
-    slug?: string;
-  };
+  plant: PlantDataType;
+  // user: UserDataType
 };
+
+
 
 const AddedToGardenSuccessMessage = () => (
   <div>Success! This plant has been added to your garden.</div>
@@ -22,13 +21,25 @@ export const PlantTile = (props: PlantTileProps) => {
   const { common_name, scientific_name, slug, id } = props.plant;
   const [addedToGarden, setAddedToGarden] = useState(false);
 
-  const plantRef = firestore.doc(`garden/${id}`);
-  const deleteFromGarden = () => plantRef.delete();
+  const { uid = "", displayName = "", email = "" } = auth.currentUser || {};
 
-  const addToGarden = () =>
-    firestore.collection("garden").add(props.plant) && setAddedToGarden(true);
+  // const plantRef = firestore.collection("garden").doc(uid);
+  // const deleteFromGarden = () => plantRef.delete();
 
+  // console.log(firestore.collection("garden"))
+
+  const addToGarden = () => {
+    const accountDataObject = {
+      plant: props.plant,
+      user: { uid, displayName, email }
+    };
+    return (
+      firestore.collection("garden").add(accountDataObject) &&
+      setAddedToGarden(true)
+    );
+  };
   return (
+    // <AppContext.Consumer>
     <div className={styles.plantTile}>
       <div className={styles.tileTitle}>
         {common_name && (
@@ -41,16 +52,17 @@ export const PlantTile = (props: PlantTileProps) => {
       {addedToGarden ? (
         <AddedToGardenSuccessMessage />
       ) : (
-        <div className={styles.plantTileButtonWrapper}>
-          {type === "garden" ? null : (
-            <Button onClick={addToGarden}>Add To Garden</Button>
-          )}
-          <Button>More Info</Button>
-          {type === "search" ? null : (
+          <div className={styles.plantTileButtonWrapper}>
+            {type === "garden" ? null : (
+              <Button onClick={addToGarden}>Add To Garden</Button>
+            )}
+            <Button>More Info</Button>
+            {/* {type === "search" ? null : (
             <Button onClick={deleteFromGarden}>Delete</Button>
-          )}
-        </div>
-      )}
+          )} */}
+          </div>
+        )}
     </div>
+    // </AppContext.Consumer>
   );
 };
