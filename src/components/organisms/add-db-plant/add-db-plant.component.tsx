@@ -1,20 +1,21 @@
 import React from "react";
 import styles from "./add-db-plant.module.scss";
-import { PlantList } from "../plant-list/plant-list.component";
-import { trefleResponseData } from "../../../pages/add-plant/add-plant.page";
+import { plantDataType } from "../../../pages/add-plant/add-plant.page";
 import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
 import { Button } from "../../atoms/button/button.component";
+import { Link } from "react-router-dom";
+import { PlantList } from "../../templates/plant-list/plant-list";
 
 type DbPlantSearchProps = {
   searchResultsLoaded: boolean;
   queryString: string;
   handleInputChange: Function;
   handleSearchClick: Function;
+  handlePaginationClick: Function;
   isLoading: boolean;
-  responseData: trefleResponseData;
+  responseData: plantDataType[];
   tryAgain: Function;
   pageNum: number;
-  handlePaginationClick: Function;
 };
 
 type dbPaginationProps = {
@@ -95,7 +96,10 @@ export const DbPlantSearch = ({
         <div className={styles.plantListWrapper}>
           {searchResultsLoaded && responseData.length == 0
             ? SorryNotFound({ tryAgain })
-            : PlantList({ responseData, searchResultsLoaded, type: "search" })}
+            : PlantList({
+                plantArray: responseData,
+                type: "search"
+              })}
         </div>
       )}
       <DbPagination

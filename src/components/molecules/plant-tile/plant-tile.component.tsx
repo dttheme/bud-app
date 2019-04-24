@@ -1,41 +1,33 @@
 import React, { useState } from "react";
+import { firestore } from "../../../firebase";
 import styles from "./plant-tile.module.scss";
 import { TileEntry } from "../../atoms/tile-entry/tile-entry.component";
 import { Button } from "../../atoms/button/button.component";
 
 type PlantTileProps = {
   type: "search" | "garden";
-  id: string;
-  common_name: string;
-  scientific_name: string;
-  slug: string;
-  addToFirecloud: (props: Object) => void;
-  // removeFromFirecloud: (props: string) => void;
+  plant: {
+    id: string;
+    common_name?: string;
+    scientific_name?: string;
+    slug?: string;
+  };
 };
 
 const AddedToGardenSuccessMessage = () => (
   <div>Success! This plant has been added to your garden.</div>
 );
 export const PlantTile = (props: PlantTileProps) => {
+  const { type } = props;
+  const { common_name, scientific_name, slug, id } = props.plant;
   const [addedToGarden, setAddedToGarden] = useState(false);
-  const {
-    common_name,
-    scientific_name,
-    slug,
-    id,
-    addToFirecloud,
-    type
-    // removeFromFirecloud
-  } = props;
 
-  const handleAddToGarden = () => {
-    addToFirecloud;
-    setAddedToGarden(true);
-  };
+  const plantRef = firestore.doc(`garden/${id}`);
+  const deleteFromGarden = () => plantRef.delete();
 
-  const handleDeleteFromGarden = () => {
-    // removeFromFirecloud(id);
-  };
+  const addToGarden = () =>
+    firestore.collection("garden").add(props.plant) && setAddedToGarden(true);
+
   return (
     <div className={styles.plantTile}>
       <div className={styles.tileTitle}>
@@ -51,11 +43,11 @@ export const PlantTile = (props: PlantTileProps) => {
       ) : (
         <div className={styles.plantTileButtonWrapper}>
           {type === "garden" ? null : (
-            <Button onClick={handleAddToGarden}>Add To Garden</Button>
+            <Button onClick={addToGarden}>Add To Garden</Button>
           )}
           <Button>More Info</Button>
           {type === "search" ? null : (
-            <Button onClick={handleDeleteFromGarden}>Delete</Button>
+            <Button onClick={deleteFromGarden}>Delete</Button>
           )}
         </div>
       )}

@@ -18,6 +18,7 @@ export const UserPlantAdd = ({
   const handleSubmit = event => {
     event.preventDefault();
     const plant = {
+      // TODO: Pass down db id
       id: Date.now().toString(),
       common_name: commonName,
       notes: notes
