@@ -22,23 +22,16 @@ export type UserDataType = {
 };
 
 export type AppContextType = {
-    plants: PlantDataType[];
-    user: UserDataType;
+    plants: PlantDataType[] | PlantDataType | any;
+    user: UserDataType | null;
 };
 
 export const AppContext = createContext({} as AppContextType);
 
 export class AppWrapper extends React.Component<AppWrapperType> {
   state = {
-      plants: [{ id: "", slug: "", common_name: "", scientific_name: "" }],
-      user: {
-        email: "",
-        displayName: "",
-        uid: "",
-        // phoneNumber: "",
-        // photoURL: "",
-        // providerId: ""
-      }
+      plants: null,
+      user: null
   };
 
   unsubscribeFromFirestore: any = null;
@@ -48,9 +41,8 @@ export class AppWrapper extends React.Component<AppWrapperType> {
     this.unsubscribeFromFirestore = firestore
       .collection("garden")
       .onSnapshot(snapshot => {
-        const garden = snapshot.docs.map(collectIdsAndDocs);
-        console.log(garden)
-        this.setState({ garden });
+        const plants = snapshot.docs.map(collectIdsAndDocs);
+        this.setState({ plants });
       });
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {

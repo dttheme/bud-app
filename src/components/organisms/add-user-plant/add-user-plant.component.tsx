@@ -19,7 +19,7 @@ export const UserPlantAdd = ({
     event.preventDefault();
     const plant = {
       // TODO: Pass down db id
-      id: Date.now().toString(),
+      id:
       common_name: commonName,
       notes: notes
     };

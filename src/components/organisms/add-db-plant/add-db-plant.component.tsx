@@ -97,6 +97,7 @@ export const DbPlantSearch = ({
             {searchResultsLoaded && responseData.length == 0
               ? SorryNotFound({ tryAgain })
               : PlantList({
+                plantDataArray: responseData,
                 type: "search"
               })}
           </div>

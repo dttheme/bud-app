@@ -7,7 +7,13 @@ import { UserDataType, PlantDataType } from "../../templates/app-wrapper/app-wra
 
 type PlantTileProps = {
   type: "search" | "garden";
-  plant: PlantDataType;
+  plant: {
+    id: string;
+    plant: {
+      common_name
+    }
+
+  };
   // user: UserDataType
 };
 
@@ -16,17 +22,18 @@ type PlantTileProps = {
 const AddedToGardenSuccessMessage = () => (
   <div>Success! This plant has been added to your garden.</div>
 );
-export const PlantTile = (props: PlantTileProps) => {
+export const PlantTile = (props) => {
   const { type } = props;
-  const { common_name, scientific_name, slug, id } = props.plant;
+  const { common_name, scientific_name, slug, id } = props.plant && props.plant.plant;
   const [addedToGarden, setAddedToGarden] = useState(false);
 
   const { uid = "", displayName = "", email = "" } = auth.currentUser || {};
 
-  // const plantRef = firestore.collection("garden").doc(uid);
-  // const deleteFromGarden = () => plantRef.delete();
-
-  // console.log(firestore.collection("garden"))
+  const plantRef = firestore.doc(`garden/${id}`);
+  const deleteFromGarden = () => {
+    console.log(id)
+    console.log('clicked!')
+    plantRef.delete()};
 
   const addToGarden = () => {
     const accountDataObject = {
@@ -38,6 +45,7 @@ export const PlantTile = (props: PlantTileProps) => {
       setAddedToGarden(true)
     );
   };
+  console.log(props)
   return (
     // <AppContext.Consumer>
     <div className={styles.plantTile}>
@@ -57,9 +65,9 @@ export const PlantTile = (props: PlantTileProps) => {
               <Button onClick={addToGarden}>Add To Garden</Button>
             )}
             <Button>More Info</Button>
-            {/* {type === "search" ? null : (
+            {type === "search" ? null : (
             <Button onClick={deleteFromGarden}>Delete</Button>
-          )} */}
+          )}
           </div>
         )}
     </div>
