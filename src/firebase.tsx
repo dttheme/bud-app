@@ -1,14 +1,14 @@
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
 var config = {
-  apiKey: "AIzaSyCD1ZwR4wD4Pvxu67OpmvMYjkZdlAW7SqY",
-  authDomain: "bud-app-45e78.firebaseapp.com",
-  databaseURL: "https://bud-app-45e78.firebaseio.com",
-  projectId: "bud-app-45e78",
-  storageBucket: "bud-app-45e78.appspot.com",
-  messagingSenderId: "508059903479"
+  apiKey: "AIzaSyB6afpEJU0lM0b8N8dvYRP1-_LourQXpX8",
+  authDomain: "bud-app-237e9.firebaseapp.com",
+  databaseURL: "https://bud-app-237e9.firebaseio.com",
+  projectId: "bud-app-237e9",
+  storageBucket: "bud-app-237e9.appspot.com",
+  messagingSenderId: "1069813271087"
 };
 firebase.initializeApp(config);
 

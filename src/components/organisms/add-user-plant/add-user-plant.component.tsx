@@ -15,23 +15,23 @@ export const UserPlantAdd = ({
   const [commonName, setCommonName] = useState("");
   const [notes, setNotes] = useState("");
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const plant = {
-      // TODO: Pass down db id
-      id:
-      common_name: commonName,
-      notes: notes
-    };
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   const plant = {
+  //     // TODO: Pass down db id
+  //     id: "1",
+  //     common_name: commonName,
+  //     notes: notes
+  //   };
 
-    firestore
-      .collection("gardens")
-      .doc(plant.id)
-      .set(plant);
-    handleCreate(plant);
-    history.push("/garden");
-    console.log("Added plant to garden.");
-  };
+  //   firestore
+  //     .collection("gardens")
+  //     .doc(plant.id)
+  //     .set(plant);
+  //   handleCreate(plant);
+  //   history.push("/garden");
+  //   console.log("Added plant to garden.");
+  // };
   return (
     <div>
       <Link to={`/add-plant`}>
@@ -53,7 +53,7 @@ export const UserPlantAdd = ({
             placeholder="Notes"
           />
         </div>
-        <Button onClick={handleSubmit}>Add Plant</Button>
+        {/* <Button onClick={handleSubmit}>Add Plant</Button> */}
       </form>
     </div>
   );

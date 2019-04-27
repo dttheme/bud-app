@@ -1,76 +1,79 @@
 import React, { useState } from "react";
+import firebase from "firebase";
 import { firestore, auth } from "../../../firebase";
 import styles from "./plant-tile.module.scss";
 import { TileEntry } from "../../atoms/tile-entry/tile-entry.component";
 import { Button } from "../../atoms/button/button.component";
-import { UserDataType, PlantDataType } from "../../templates/app-wrapper/app-wrapper.component";
+import {
+  UserDataType,
+  PlantDataType
+} from "../../templates/app-wrapper/app-wrapper.component";
 
 type PlantTileProps = {
   type: "search" | "garden";
-  plant: {
-    id: string;
-    plant: {
-      common_name
-    }
-
-  };
+  // FIX: typing below
+  plant: any;
+  gardenId: string | undefined;
   // user: UserDataType
 };
-
-
 
 const AddedToGardenSuccessMessage = () => (
   <div>Success! This plant has been added to your garden.</div>
 );
-export const PlantTile = (props) => {
-  const { type } = props;
-  const { common_name, scientific_name, slug, id } = props.plant && props.plant.plant;
+export const PlantTile = (props: PlantTileProps) => {
+  const { type, gardenId } = props;
+
   const [addedToGarden, setAddedToGarden] = useState(false);
 
-  const { uid = "", displayName = "", email = "" } = auth.currentUser || {};
+  // const { uid = "", displayName = "", email = "" } = auth.currentUser || {};
+  const plantRef = firestore.doc(`garden/${gardenId}`);
 
-  const plantRef = firestore.doc(`garden/${id}`);
-  const deleteFromGarden = () => {
-    console.log(id)
-    console.log('clicked!')
-    plantRef.delete()};
+  console.log(props);
+  let deleteFromGarden;
+  let plantData = props.plant;
+  if (type === "garden") {
+    deleteFromGarden = () => {
+      plantRef.delete();
+    };
+  }
 
   const addToGarden = () => {
-    const accountDataObject = {
-      plant: props.plant,
-      user: { uid, displayName, email }
-    };
-    return (
-      firestore.collection("garden").add(accountDataObject) &&
-      setAddedToGarden(true)
-    );
+    if (gardenId !== undefined) {
+      const gardenRef = firestore.collection("garden").doc(gardenId);
+      gardenRef.update({
+        plant: firebase.firestore.FieldValue.arrayUnion(props.plant)
+      });
+    }
+    firestore.collection("garden").add(props.plant);
+
+    setAddedToGarden(true);
   };
-  console.log(props)
   return (
-    // <AppContext.Consumer>
     <div className={styles.plantTile}>
       <div className={styles.tileTitle}>
-        {common_name && (
-          <TileEntry valueTitle="Common Name" value={common_name} />
+        {plantData.common_name && (
+          <TileEntry valueTitle="Common Name" value={plantData.common_name} />
         )}
-        {scientific_name && (
-          <TileEntry valueTitle="Scientific Name" value={scientific_name} />
+        {plantData.scientific_name && (
+          <TileEntry
+            valueTitle="Scientific Name"
+            value={plantData.scientific_name}
+          />
         )}
       </div>
       {addedToGarden ? (
         <AddedToGardenSuccessMessage />
       ) : (
-          <div className={styles.plantTileButtonWrapper}>
-            {type === "garden" ? null : (
-              <Button onClick={addToGarden}>Add To Garden</Button>
-            )}
-            <Button>More Info</Button>
-            {type === "search" ? null : (
+        <div className={styles.plantTileButtonWrapper}>
+          {type === "garden" ? null : (
+            <Button onClick={addToGarden}>Add To Garden</Button>
+          )}
+          <Button>More Info</Button>
+          {type === "search" ? null : (
             <Button onClick={deleteFromGarden}>Delete</Button>
           )}
-          </div>
-        )}
+        </div>
+      )}
     </div>
-    // </AppContext.Consumer>
   );
 };

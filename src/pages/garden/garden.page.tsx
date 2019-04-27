@@ -9,7 +9,11 @@ class Garden extends React.Component {
         {state => (
           <div>
             <h2>Garden</h2>
-            <PlantList type="garden" plantDataArray={state.plants} />
+            <PlantList
+              type="garden"
+              gardenId={state.gardenId}
+              plantDataArray={state.plants}
+            />
           </div>
         )}
       </AppContext.Consumer>

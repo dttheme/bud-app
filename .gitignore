@@ -13,7 +13,7 @@
 
 # api keys
 .env
-/src/firebase.tsx
+firebase.tsx
 
 # misc
 .DS_Store

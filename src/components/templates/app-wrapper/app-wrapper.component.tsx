@@ -2,7 +2,6 @@ import React, { createContext } from "react";
 import styles from "./app-wrapper.module.scss";
 import { Header } from "../../organisms/header/header.component";
 import { firestore, auth } from "../../../firebase";
-import { collectIdsAndDocs } from "../../../utilities";
 
 type AppWrapperType = {
   children: React.ReactNode;
@@ -22,31 +21,41 @@ export type UserDataType = {
 };
 
 export type AppContextType = {
-    plants: PlantDataType[] | PlantDataType | any;
-    user: UserDataType | null;
+  plants: PlantDataType[] | null;
+  user: UserDataType | null;
+  gardenId?: string;
 };
 
 export const AppContext = createContext({} as AppContextType);
 
 export class AppWrapper extends React.Component<AppWrapperType> {
   state = {
-      plants: null,
-      user: null
+    plants: null,
+    user: null,
+    gardenId: undefined
   };
 
   unsubscribeFromFirestore: any = null;
   unsubscribeFromAuth: any = null;
 
+  collectIdsAndDocs = doc => {
+    this.setState({ gardenId: doc.id });
+    return { id: doc.id, ...doc.data() };
+  };
+
   componentDidMount = async () => {
     this.unsubscribeFromFirestore = firestore
       .collection("garden")
       .onSnapshot(snapshot => {
-        const plants = snapshot.docs.map(collectIdsAndDocs);
-        this.setState({ plants });
+        const plantSnapshot: any = snapshot.docs.map(this.collectIdsAndDocs);
+        this.setState({
+          plants: plantSnapshot
+        });
       });
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState(prevState => ({ user }));
+      const { displayName, uid, email } = user as any;
+      this.setState({ user: { displayName, uid, email } });
     });
   };
 
@@ -55,6 +64,7 @@ export class AppWrapper extends React.Component<AppWrapperType> {
   };
 
   render() {
+    console.log(this.state);
     return (
       <>
         <AppContext.Provider value={this.state}>
