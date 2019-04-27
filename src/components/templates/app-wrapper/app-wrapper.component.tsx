@@ -47,15 +47,12 @@ export class AppWrapper extends React.Component<AppWrapperType> {
     this.unsubscribeFromFirestore = firestore
       .collection("garden")
       .onSnapshot(snapshot => {
-        const plantSnapshot: any = snapshot.docs.map(this.collectIdsAndDocs);
-        this.setState({
-          plants: plantSnapshot
-        });
+        const plants: any = snapshot.docs.map(this.collectIdsAndDocs);
+        this.setState({ plants });
       });
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      const { displayName, uid, email } = user as any;
-      this.setState({ user: { displayName, uid, email } });
+      this.setState({ user });
     });
   };
 

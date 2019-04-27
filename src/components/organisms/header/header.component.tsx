@@ -31,9 +31,6 @@ export const Header = () => {
           </Tooltip>
         </Link>
       </span>
-      <AppContext.Consumer>
-        {state => <Authentication user={state.user} />}
-      </AppContext.Consumer>
     </header>
   );
 };

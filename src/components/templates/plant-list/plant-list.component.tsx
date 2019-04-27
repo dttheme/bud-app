@@ -4,20 +4,23 @@ import { PlantTile } from "../../molecules/plant-tile/plant-tile.component";
 import {
   PlantDataType,
   AppContextType,
-  AppContext
+  AppContext,
+  UserDataType
 } from "../../templates/app-wrapper/app-wrapper.component";
 
 type PlantListProps = {
   type: "search" | "garden";
   // FIX: typing below
   plantDataArray: PlantDataType[] | null;
+  user?: UserDataType;
   gardenId?: string;
 };
 
 export const PlantList = ({
   plantDataArray,
   type,
-  gardenId
+  gardenId,
+  user
 }: PlantListProps) => {
   const plantListStyles = undefined;
   // type === "garden" ? styles.gardenList : styles.resultsList;
@@ -31,7 +34,8 @@ export const PlantList = ({
             <PlantTile
               key={plant.id}
               gardenId={gardenId}
-              plant={plant}
+              plants={plant}
+              user={user}
               type={type}
             />
           );
