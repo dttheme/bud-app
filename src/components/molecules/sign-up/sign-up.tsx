@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { auth, createUserProfileDocument } from "../../../firebase";
 
 export const SignUp = () => {
   const [signUp, setSignUp] = useState({
-    displayName: "",
+    display_name: "",
     email: "",
     password: ""
   });
@@ -12,9 +13,19 @@ export const SignUp = () => {
     setSignUp({ [name]: value, ...signUp });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    setSignUp({ displayName: "", email: "", password: "" });
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        signUp.email,
+        signUp.password
+      );
+
+      createUserProfileDocument(user, signUp.display_name);
+    } catch (error) {
+      console.log(error);
+    }
+    setSignUp({ display_name: "", email: "", password: "" });
   };
 
   return (
@@ -24,7 +35,7 @@ export const SignUp = () => {
         type="text"
         name="displayName"
         placeholder="Display Name"
-        value={signUp.displayName}
+        value={signUp.display_name}
         onChange={handleChange}
       />
       <input
