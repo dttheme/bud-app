@@ -10,7 +10,8 @@ export const SignUp = () => {
 
   const handleChange = event => {
     const { name, value } = event.target;
-    setSignUp({ [name]: value, ...signUp });
+    setSignUp({ ...signUp, [name]: value });
+    console.log(signUp);
   };
 
   const handleSubmit = async event => {
@@ -25,7 +26,7 @@ export const SignUp = () => {
     } catch (error) {
       console.log(error);
     }
-    setSignUp({ display_name: "", email: "", password: "" });
+    // await setSignUp({ display_name: "", email: "", password: "" });
   };
 
   return (
@@ -33,7 +34,7 @@ export const SignUp = () => {
       <h2>Sign Up</h2>
       <input
         type="text"
-        name="displayName"
+        name="display_name"
         placeholder="Display Name"
         value={signUp.display_name}
         onChange={handleChange}
