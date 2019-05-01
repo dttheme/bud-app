@@ -14,28 +14,11 @@ export const collectIdsAndDocs = doc => {
 };
 
 export class AppWrapper extends React.Component<AppWrapperType> {
-  state = { user: null, gardenId: " " };
-  unsubscribeFromAuth: any = null;
-  componentDidMount = async () => {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      const user = await createUserProfileDocument(userAuth);
-      console.log(user.uid);
-      this.setState({
-        user,
-        gardenId: user.uid
-      });
-    });
-  };
-  componentWillUnmount = () => {
-    this.unsubscribeFromAuth();
-  };
   render() {
-    const { user, gardenId } = this.state;
     return (
       <>
-        <AppProvider user={user} gardenId={gardenId}>
+        <AppProvider>
           <Header />
-          <Authentication user={user} />
           <div className={styles.pageWrapper}>{this.props.children}</div>
         </AppProvider>
       </>

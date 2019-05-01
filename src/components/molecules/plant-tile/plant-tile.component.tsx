@@ -11,7 +11,7 @@ type PlantTileProps = {
   // FIX: typing below
   plants: PlantDataType | any;
   gardenId: string;
-  user?: UserDataType | null;
+  user: UserDataType | null;
 };
 
 const AddedToGardenSuccessMessage = () => (
@@ -19,7 +19,6 @@ const AddedToGardenSuccessMessage = () => (
 );
 export const PlantTile = ({ type, gardenId, user, plants }: PlantTileProps) => {
   const [addedToGarden, setAddedToGarden] = useState(false);
-
   const { uid = "", displayName = "", email = "" } = auth.currentUser || {};
   const plantRef = firestore.doc(`garden/${gardenId}`);
 
@@ -36,6 +35,7 @@ export const PlantTile = ({ type, gardenId, user, plants }: PlantTileProps) => {
   }
 
   const addToGarden = async () => {
+    console.log(plants, user);
     await firestore
       .collection("garden")
       .doc(gardenId)
@@ -50,9 +50,7 @@ export const PlantTile = ({ type, gardenId, user, plants }: PlantTileProps) => {
     setAddedToGarden(true);
   };
 
-  console.log(user && user.uid == gardenId);
-
-  return user && user.uid == gardenId ? (
+  const tile = (
     <div className={styles.plantTile}>
       <div className={styles.tileTitle}>
         {plantData.common_name && (
@@ -79,5 +77,15 @@ export const PlantTile = ({ type, gardenId, user, plants }: PlantTileProps) => {
         </div>
       )}
     </div>
-  ) : null;
+  );
+
+  if (type === "garden") {
+    return user && user.uid == gardenId ? (
+      tile
+    ) : (
+      <div>You don't have any posts yet!</div>
+    );
+  } else {
+    return tile;
+  }
 };

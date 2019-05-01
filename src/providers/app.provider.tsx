@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import { collectIdsAndDocs } from "../components/templates/app-wrapper/app-wrapper.component";
-import { firestore } from "../firebase";
+import { firestore, auth, createUserProfileDocument } from "../firebase";
+import { Authentication } from "../components/organisms/authentication/authentication.component";
 
 export type PlantDataType = {
   slug: string;
@@ -15,17 +16,15 @@ export type UserDataType = {
   email: string;
 };
 
-type ProviderProps = {
+export interface AppStateType {
+  plants: PlantDataType[] | null;
   user: UserDataType | null;
   gardenId: string;
-};
-export interface AppStateType extends ProviderProps {
-  plants: PlantDataType[] | null;
 }
 
 export const AppContext = createContext({} as AppStateType);
 
-export class AppProvider extends React.Component<ProviderProps, AppStateType> {
+export class AppProvider extends React.Component<{}, AppStateType> {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +33,7 @@ export class AppProvider extends React.Component<ProviderProps, AppStateType> {
       gardenId: " "
     };
   }
-
+  unsubscribeFromAuth: any = null;
   unsubscribeFromFirestore: any = null;
 
   componentDidMount = async () => {
@@ -44,27 +43,38 @@ export class AppProvider extends React.Component<ProviderProps, AppStateType> {
       .collection("plants")
       .get();
 
-    this.unsubscribeFromFirestore = firestore
-      .collection("garden")
-      .doc(this.state.gardenId)
-      .collection("plants")
-      .onSnapshot(snapshot => {
-        const plants = snapshot.docs.map(collectIdsAndDocs);
-        this.setState({ plants });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      const user = await createUserProfileDocument(userAuth);
+      console.log(userAuth);
+      this.setState({
+        user,
+        gardenId: user
       });
+
+      this.unsubscribeFromFirestore = firestore
+        .collection("garden")
+        .doc(this.state.gardenId)
+        .collection("plants")
+        .onSnapshot(snapshot => {
+          const plants = snapshot.docs.map(collectIdsAndDocs);
+          this.setState(prevState => ({ ...prevState, plants }));
+        });
+    });
   };
 
   componentWillUnmount = () => {
     this.unsubscribeFromFirestore();
+    this.unsubscribeFromAuth();
   };
 
   render() {
-    const { children, user, gardenId } = this.props;
-    const { plants } = this.state;
-
-    const context = { plants, gardenId, user };
+    const { children } = this.props;
+    const { user } = this.state;
     return (
-      <AppContext.Provider value={context}>{children}</AppContext.Provider>
+      <AppContext.Provider value={this.state}>
+        <Authentication user={user} />
+        {children}
+      </AppContext.Provider>
     );
   }
 }

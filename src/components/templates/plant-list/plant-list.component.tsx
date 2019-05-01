@@ -11,21 +11,22 @@ type PlantListProps = {
 export const PlantList = ({ plantDataArray, type }: PlantListProps) => {
   const plantListStyles = undefined;
   // type === "garden" ? styles.gardenList : styles.resultsList;
+  // console.log(plantDataArray);
   return (
     <AppContext.Consumer>
       {state => {
-        console.log(state);
-        console.log(plantDataArray);
+        // console.log(state);
         let plantData = type == "garden" ? state.plants : plantDataArray;
         return (
           <div className={plantListStyles}>
             {plantData &&
               plantData.map(plant => {
-                console.log(plant);
+                // console.log(plant);
                 return (
                   <PlantTile
                     key={plant.id}
                     gardenId={state.gardenId}
+                    user={state.user}
                     plants={plant}
                     type={type}
                   />
