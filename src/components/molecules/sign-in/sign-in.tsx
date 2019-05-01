@@ -6,7 +6,7 @@ export const SignIn = () => {
 
   const handleChange = event => {
     const { name, value } = event.target;
-    setUser({ [name]: value, ...user });
+    setUser({ ...user, [name]: value });
   };
 
   const handleSubmit = event => {

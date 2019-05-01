@@ -4,17 +4,14 @@ import { firestore, auth } from "../../../firebase";
 import styles from "./plant-tile.module.scss";
 import { TileEntry } from "../../atoms/tile-entry/tile-entry.component";
 import { Button } from "../../atoms/button/button.component";
-import {
-  UserDataType,
-  PlantDataType
-} from "../../templates/app-wrapper/app-wrapper.component";
+import { UserDataType, PlantDataType } from "../../../providers/app.provider";
 
 type PlantTileProps = {
   type: "search" | "garden";
   // FIX: typing below
   plants: PlantDataType | any;
   gardenId: string;
-  user: UserDataType | null;
+  user?: UserDataType | null;
 };
 
 const AddedToGardenSuccessMessage = () => (
@@ -52,6 +49,8 @@ export const PlantTile = ({ type, gardenId, user, plants }: PlantTileProps) => {
 
     setAddedToGarden(true);
   };
+
+  console.log(user && user.uid == gardenId);
 
   return user && user.uid == gardenId ? (
     <div className={styles.plantTile}>

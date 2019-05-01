@@ -26,7 +26,7 @@ export const SignUp = () => {
     } catch (error) {
       console.log(error);
     }
-    // await setSignUp({ display_name: "", email: "", password: "" });
+    setSignUp({ display_name: "", email: "", password: "" });
   };
 
   return (

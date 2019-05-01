@@ -3,8 +3,6 @@ import styles from "./header.module.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "../../atoms/tooltip/tooltip.component";
 import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
-import { Authentication } from "../authentication/authentication.component";
-import { AppContext } from "../../templates/app-wrapper/app-wrapper.component";
 
 export const Header = () => {
   return (

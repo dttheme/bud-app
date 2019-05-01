@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./add-db-plant.module.scss";
-import { PlantDataType } from "../../templates/app-wrapper/app-wrapper.component";
 import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
 import { Button } from "../../atoms/button/button.component";
 import { Link } from "react-router-dom";
 import { PlantList } from "../../templates/plant-list/plant-list.component";
+import { PlantDataType } from "../../../providers/app.provider";
 
 type DbPlantSearchProps = {
   searchResultsLoaded: boolean;
@@ -36,25 +36,25 @@ const DbPagination = ({
   pageNum,
   responseDataLength
 }: dbPaginationProps) => (
-    <>
-      {pageNum > 0 ? (
-        <IconWrapper
-          ariaLabel="Previous results page"
-          onClick={handlePaginationClick("decrement")}
-        >
-          👈
+  <>
+    {pageNum > 0 ? (
+      <IconWrapper
+        ariaLabel="Previous results page"
+        onClick={handlePaginationClick("decrement")}
+      >
+        👈
       </IconWrapper>
-      ) : null}
-      {responseDataLength == 4 ? (
-        <IconWrapper
-          ariaLabel="Next results page"
-          onClick={handlePaginationClick("increment")}
-        >
-          👉
+    ) : null}
+    {responseDataLength == 4 ? (
+      <IconWrapper
+        ariaLabel="Next results page"
+        onClick={handlePaginationClick("increment")}
+      >
+        👉
       </IconWrapper>
-      ) : null}
-    </>
-  );
+    ) : null}
+  </>
+);
 
 export const DbPlantSearch = ({
   handleInputChange,
@@ -93,15 +93,15 @@ export const DbPlantSearch = ({
           <div className={styles.loadingFlower}>🌼</div>
         </IconWrapper>
       ) : (
-          <div className={styles.plantListWrapper}>
-            {searchResultsLoaded && responseData.length == 0
-              ? SorryNotFound({ tryAgain })
-              : PlantList({
+        <div className={styles.plantListWrapper}>
+          {searchResultsLoaded && responseData.length == 0
+            ? SorryNotFound({ tryAgain })
+            : PlantList({
                 plantDataArray: responseData,
                 type: "search"
               })}
-          </div>
-        )}
+        </div>
+      )}
       <DbPagination
         handlePaginationClick={handlePaginationClick}
         pageNum={pageNum}
