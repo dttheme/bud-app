@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 // import styles from "../plant-list";
 import { PlantTile } from "../../molecules/plant-tile/plant-tile.component";
-import { AppContext, PlantDataType } from "../../../providers/app.provider";
+import {
+  GardenContext,
+  PlantDataType
+} from "../../../providers/garden.provider";
+import { UserContext } from "../../../providers/user.provider";
 
 type PlantListProps = {
   type: "search" | "garden";
@@ -9,32 +13,25 @@ type PlantListProps = {
 };
 
 export const PlantList = ({ plantDataArray, type }: PlantListProps) => {
+  const garden = useContext(GardenContext);
   const plantListStyles = undefined;
   // type === "garden" ? styles.gardenList : styles.resultsList;
   // console.log(plantDataArray);
+  let plantData = type == "garden" ? garden.plants : plantDataArray;
   return (
-    <AppContext.Consumer>
-      {state => {
-        // console.log(state);
-        let plantData = type == "garden" ? state.plants : plantDataArray;
-        return (
-          <div className={plantListStyles}>
-            {plantData &&
-              plantData.map(plant => {
-                // console.log(plant);
-                return (
-                  <PlantTile
-                    key={plant.id}
-                    gardenId={state.gardenId}
-                    user={state.user}
-                    plants={plant}
-                    type={type}
-                  />
-                );
-              })}
-          </div>
-        );
-      }}
-    </AppContext.Consumer>
+    <div className={plantListStyles}>
+      {plantData &&
+        plantData.map(plant => {
+          // console.log(plant);
+          return (
+            <PlantTile
+              key={plant.id}
+              gardenId={garden.gardenId}
+              plants={plant}
+              type={type}
+            />
+          );
+        })}
+    </div>
   );
 };

@@ -4,7 +4,7 @@ import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
 import { Button } from "../../atoms/button/button.component";
 import { Link } from "react-router-dom";
 import { PlantList } from "../../templates/plant-list/plant-list.component";
-import { PlantDataType } from "../../../providers/app.provider";
+import { PlantDataType } from "../../../providers/garden.provider";
 
 type DbPlantSearchProps = {
   searchResultsLoaded: boolean;

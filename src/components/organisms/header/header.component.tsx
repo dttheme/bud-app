@@ -28,6 +28,13 @@ export const Header = () => {
             </IconWrapper>
           </Tooltip>
         </Link>
+        <Link to="/account" className={styles.navText}>
+          <Tooltip text="Account">
+            <IconWrapper ariaLabel="Account" className={styles.headerIcon}>
+              <span aria-label="account">👤</span>
+            </IconWrapper>
+          </Tooltip>
+        </Link>
       </span>
     </header>
   );
