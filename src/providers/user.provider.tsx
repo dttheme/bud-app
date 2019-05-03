@@ -26,34 +26,34 @@ export const UserContext = createContext({} as AuthStateType);
 export const UserProvider = props => {
   const [authentication, setAuthState] = useState({
     user: null,
-    gardenId: undefined
+    gardenId: " "
   });
-  let unsubscribeFromAuth: any = null;
   useEffect(() => {
     let userRef;
-    unsubscribeFromAuth = auth.onAuthStateChanged(async authState => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async authState => {
+      console.log(authState);
       if (authState) {
         userRef = await createUserProfileDocument(authState);
         userRef.onSnapshot(snapshot => {
           setAuthState({
             user: {
-              uid: snapshot.uid,
+              uid: snapshot.id,
               ...snapshot.data()
             },
-            gardenId: snapshot.uid
+            gardenId: snapshot.id
           });
         });
+        setAuthState({
+          user: userRef,
+          gardenId: userRef && userRef.id ? userRef.id : " "
+        });
       }
-      setAuthState({
-        user: userRef,
-        gardenId: userRef && userRef.uid ? userRef.uid : " "
-      });
     });
-    return function cleanup() {
+    return () => {
       unsubscribeFromAuth;
     };
-  }, [auth]);
-
+  }, []);
+  console.log(authentication);
   return (
     <UserContext.Provider value={authentication}>
       {props.children}

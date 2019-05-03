@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { ActiveUser } from "../../molecules/active-user/active-user.component";
 import { UserContext } from "../../../providers/user.provider";
 import { UserDataType } from "../../../providers/garden.provider";
-import { firestore } from "../../../firebase";
+import { firestore, storage } from "../../../firebase";
+import { response } from "express";
 
 export const UserProfile = () => {
   const [displayName, setDisplayName] = useState("");
@@ -11,7 +12,7 @@ export const UserProfile = () => {
   const user = useContext(UserContext).user as UserDataType;
 
   const userRef = firestore.doc(`/users/${user && user.uid}`);
-
+  const imageRef = imageInput && imageInput.files[0];
   const handleDisplayNameChange = event => {
     const { value } = event.target;
     setDisplayName(value);
@@ -21,6 +22,16 @@ export const UserProfile = () => {
     event.preventDefault();
     if (displayName) {
       userRef.update({ displayName });
+    }
+    if (imageRef) {
+      storage
+        .ref()
+        .child("user-profiles")
+        .child(user.uid)
+        .child(imageRef.name)
+        .put(imageRef)
+        .then(response => response.ref.getDownloadURL)
+        .then(photoUrl => userRef.update({ photoUrl }));
     }
   };
   return (

@@ -18,6 +18,7 @@ export const PlantList = ({ plantDataArray, type }: PlantListProps) => {
   // type === "garden" ? styles.gardenList : styles.resultsList;
   // console.log(plantDataArray);
   let plantData = type == "garden" ? garden.plants : plantDataArray;
+  // console.log(plantData);
   return (
     <div className={plantListStyles}>
       {plantData &&

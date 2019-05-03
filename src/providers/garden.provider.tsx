@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { collectIdsAndDocs } from "../components/templates/app-wrapper/app-wrapper.component";
-import { firestore } from "../firebase";
+import { firestore, auth } from "../firebase";
 import { UserContext } from "./user.provider";
 
 export type PlantDataType = {
@@ -26,6 +26,7 @@ export const GardenContext = createContext({} as GardenStateType);
 export const GardenProvider = props => {
   const [gardenId, setGardenId] = useState(" ");
   const [plants, setPlants] = useState(null);
+  const id = useContext(UserContext).gardenId;
 
   const fetchFirestore = async () => {
     await firestore
@@ -34,12 +35,11 @@ export const GardenProvider = props => {
       .collection("plants")
       .get();
   };
-  let unsubscribeFromFirestore: any = null;
-  const user = useContext(UserContext).user;
+
+  fetchFirestore;
   useEffect(() => {
-    user !== null ? setGardenId(user.uid) : null;
-    fetchFirestore();
-    unsubscribeFromFirestore = firestore
+    id && setGardenId(id);
+    const unsubscribeFromFirestore = firestore
       .collection("garden")
       .doc(gardenId)
       .collection("plants")
@@ -47,10 +47,11 @@ export const GardenProvider = props => {
         const plantSnaps: any = snapshot.docs.map(collectIdsAndDocs);
         setPlants(plantSnaps);
       });
-    return function cleanup() {
+    return () => {
       unsubscribeFromFirestore;
     };
-  });
+  }, [plants]);
+
   const { children } = props;
   // console.log(plants);
   return (
