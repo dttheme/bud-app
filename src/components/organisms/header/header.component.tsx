@@ -3,12 +3,13 @@ import styles from "./header.module.scss";
 import { Link } from "react-router-dom";
 import { Tooltip } from "../../atoms/tooltip/tooltip.component";
 import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
+import { Authentication } from "../authentication/authentication.component";
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <Link to="/" className={`${styles.navLink} ${styles.navText}`}>
-        <h1>Plant Bud</h1>
+        <h1>Bud</h1>
       </Link>
       <span>
         <Link to="/add-plant" className={styles.navText}>
@@ -36,6 +37,7 @@ export const Header = () => {
           </Tooltip>
         </Link>
       </span>
+      <Authentication />
     </header>
   );
 };

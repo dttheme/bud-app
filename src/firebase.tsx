@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
-import { unsubscribeFromAuth } from "./providers/user.provider";
+import { unsubscribeFromAuth, UserProvider } from "./providers/user.provider";
 
 var config = {
   apiKey: "AIzaSyB6afpEJU0lM0b8N8dvYRP1-_LourQXpX8",
@@ -20,8 +20,7 @@ export const storage = firebase.storage();
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 export const signOut = () => {
-  unsubscribeFromAuth();
-  auth.signOut();
+  auth.signOut().then(unsubscribeFromAuth());
 };
 
 export const createUserProfileDocument = async (user, additionalData?) => {
@@ -31,7 +30,6 @@ export const createUserProfileDocument = async (user, additionalData?) => {
   if (!snapshot.exists) {
     const { displayName, email, photoUrl } = user;
     const createdAt = new Date();
-    console.log(displayName);
     try {
       await userRef.set({
         displayName,

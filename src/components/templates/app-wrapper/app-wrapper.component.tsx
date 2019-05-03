@@ -14,13 +14,10 @@ export const collectIdsAndDocs = doc => {
 };
 
 export const AppWrapper = props => {
-  const user = useContext(UserContext);
   return (
     <>
-      <Authentication />
       <UserProvider>
         <GardenProvider>
-          <Header />
           <div className={styles.pageWrapper}>{props.children}</div>
         </GardenProvider>
       </UserProvider>

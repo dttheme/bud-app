@@ -86,7 +86,9 @@ export const PlantTile = ({ type, gardenId, plants }: PlantTileProps) => {
   );
 
   if (type === "garden") {
-    return authState.user && authState.user.uid == gardenId ? (
+    return authState.user !== null &&
+      authState.user !== undefined &&
+      authState.user.uid == gardenId ? (
       tile
     ) : (
       <div>You don't have any posts yet!</div>

@@ -14,11 +14,12 @@ export type UserDataType = {
   uid: string;
   displayName: string;
   email: string;
-} | null;
+};
 
 export type AuthStateType = {
-  user: UserDataType;
-  gardenId?: string;
+  user: UserDataType | null;
+  gardenId: string;
+  isLoading: boolean;
 };
 
 export const UserContext = createContext({} as AuthStateType);
@@ -27,14 +28,19 @@ export let unsubscribeFromAuth: any = null;
 export const UserProvider = props => {
   const [authentication, setAuthState] = useState({
     user: null,
-    gardenId: " "
+    gardenId: " ",
+    isLoading: false
   });
 
+  // on mount, subscribe to any user data
   useEffect(() => {
     let userRef;
     unsubscribeFromAuth = auth.onAuthStateChanged(async authState => {
       console.log(authState);
       if (authState) {
+        setAuthState(prevState => {
+          return { isLoading: true, ...prevState };
+        });
         userRef = await createUserProfileDocument(authState);
         userRef.onSnapshot(snapshot => {
           setAuthState({
@@ -42,17 +48,25 @@ export const UserProvider = props => {
               uid: snapshot.id,
               ...snapshot.data()
             },
-            gardenId: snapshot.id
+            gardenId: snapshot.id,
+            isLoading: false
           });
-        });
-        setAuthState({
-          user: userRef,
-          gardenId: userRef && userRef.id ? userRef.id : " "
         });
       }
     });
-    return () => unsubscribeFromAuth();
+    return () =>
+      unsubscribeFromAuth() &&
+      setAuthState(prevState => {
+        return { ...prevState, isLoading: false };
+      });
   }, []);
+
+  // useEffect(() => {
+  //   return () =>
+  //     unsubscribeFromAuth() &&
+  //     setAuthState({ isLoading: false, user: null, gardenId: " " });
+  // }, []);
+
   console.log(authentication);
   return (
     <UserContext.Provider value={authentication}>

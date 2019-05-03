@@ -37,9 +37,10 @@ export const GardenProvider = props => {
   };
 
   fetchFirestore;
+  let unsubscribeFromFirestore: any = null;
   useEffect(() => {
     id && setGardenId(id);
-    const unsubscribeFromFirestore = firestore
+    unsubscribeFromFirestore = firestore
       .collection("garden")
       .doc(gardenId)
       .collection("plants")
@@ -47,10 +48,9 @@ export const GardenProvider = props => {
         const plantSnaps: any = snapshot.docs.map(collectIdsAndDocs);
         setPlants(plantSnaps);
       });
-    return () => {
-      unsubscribeFromFirestore;
-    };
   }, [plants]);
+
+  useEffect(() => () => unsubscribeFromFirestore);
 
   const { children } = props;
   // console.log(plants);
