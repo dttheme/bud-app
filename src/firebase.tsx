@@ -2,6 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
+import { unsubscribeFromAuth } from "./providers/user.provider";
 
 var config = {
   apiKey: "AIzaSyB6afpEJU0lM0b8N8dvYRP1-_LourQXpX8",
@@ -18,7 +19,10 @@ export const auth = firebase.auth();
 export const storage = firebase.storage();
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
-export const signOut = () => auth.signOut();
+export const signOut = () => {
+  unsubscribeFromAuth();
+  auth.signOut();
+};
 
 export const createUserProfileDocument = async (user, additionalData?) => {
   if (!user) return;

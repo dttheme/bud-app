@@ -17,9 +17,9 @@ export const AppWrapper = props => {
   const user = useContext(UserContext);
   return (
     <>
+      <Authentication />
       <UserProvider>
         <GardenProvider>
-          <Authentication />
           <Header />
           <div className={styles.pageWrapper}>{props.children}</div>
         </GardenProvider>

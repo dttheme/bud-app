@@ -23,14 +23,16 @@ export type AuthStateType = {
 
 export const UserContext = createContext({} as AuthStateType);
 
+export let unsubscribeFromAuth: any = null;
 export const UserProvider = props => {
   const [authentication, setAuthState] = useState({
     user: null,
     gardenId: " "
   });
+
   useEffect(() => {
     let userRef;
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async authState => {
+    unsubscribeFromAuth = auth.onAuthStateChanged(async authState => {
       console.log(authState);
       if (authState) {
         userRef = await createUserProfileDocument(authState);
@@ -49,9 +51,7 @@ export const UserProvider = props => {
         });
       }
     });
-    return () => {
-      unsubscribeFromAuth;
-    };
+    return () => unsubscribeFromAuth();
   }, []);
   console.log(authentication);
   return (
