@@ -8,7 +8,7 @@ type ActiveUserType = {
 };
 
 export const ActiveUser = ({ user }: ActiveUserType) => {
-  const { uid, displayName, email } = user;
+  // user !== null ? ({ uid, displayName, email } = user) : null;
   // const handleSignOut = () => {
   //   isUserSignedIn && isUserSignedIn(false);
   //   signOut();
@@ -17,9 +17,9 @@ export const ActiveUser = ({ user }: ActiveUserType) => {
     <>
       <div>WELCOME</div>
       <button onClick={signOut}>Sign Out</button>
-      <div>{displayName}</div>
-      <div>{email}</div>
-      <div>{uid}</div>
+      <div>{user && user.displayName}</div>
+      {/* <div>{email}</div>
+      <div>{uid}</div> */}
     </>
   );
 };
