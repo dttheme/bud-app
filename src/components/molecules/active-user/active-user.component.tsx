@@ -18,6 +18,9 @@ export const ActiveUser = ({ user }: ActiveUserType) => {
       <div>WELCOME</div>
       <button onClick={signOut}>Sign Out</button>
       <div>{user && user.displayName}</div>
+      {user && user.photoUrl ? (
+        <img src={user.photoUrl} alt={`${user.displayName} Account Image`} />
+      ) : null}
       {/* <div>{email}</div>
       <div>{uid}</div> */}
     </>
