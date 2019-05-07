@@ -21,7 +21,10 @@ export interface GardenStateType {
   gardenId: string;
 }
 
-export const GardenContext = createContext({} as GardenStateType);
+export const GardenContext = createContext({
+  gardenId: " ",
+  plants: [{}] as PlantDataType[] | null
+});
 
 export const GardenProvider = props => {
   const [gardenId, setGardenId] = useState(" ");
