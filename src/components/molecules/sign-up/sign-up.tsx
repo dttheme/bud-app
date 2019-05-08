@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth, createUserProfileDocument } from "../../../firebase";
+import { Redirect, withRouter } from "react-router";
 
-export const SignUp = () => {
+export const SignUp = withRouter(({ history }) => {
   const [signUp, setSignUp] = useState({
     display_name: "",
     email: "",
@@ -22,11 +23,20 @@ export const SignUp = () => {
         signUp.password
       );
 
-      createUserProfileDocument(user, signUp.display_name);
+      createUserProfileDocument(user, { displayName: signUp.display_name });
+      console.log(signUp.display_name);
     } catch (error) {
       console.log(error);
+      // callback function here to display login error component
+      // code: 'auth/invalid-email'
     }
-    setSignUp({ display_name: "", email: "", password: "" });
+    setSignUp({
+      display_name: "",
+      email: "",
+      password: ""
+    });
+    history.push("/add-plant");
+    console.log("success!");
   };
 
   return (
@@ -56,4 +66,4 @@ export const SignUp = () => {
       <input type="submit" value="Sign Up" />
     </form>
   );
-};
+});

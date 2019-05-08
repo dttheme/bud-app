@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { signOut } from "../../../firebase";
-import { UserDataType } from "../../../providers/user.provider";
+import { UserDataType, UserContext } from "../../../providers/user.provider";
 
-type ActiveUserType = {
-  user: UserDataType;
-  // isUserSignedIn?: React.Dispatch<React.SetStateAction<boolean>>;
-};
+// type ActiveUserType = {
+//   user: UserDataType;
+//   isUserSignedIn: Function;
+// };
 
-export const ActiveUser = ({ user }: ActiveUserType) => {
-  // user !== null ? ({ uid, displayName, email } = user) : null;
-  // const handleSignOut = () => {
-  //   isUserSignedIn && isUserSignedIn(false);
-  //   signOut();
-  // };
+export const ActiveUser = (user: UserDataType) => {
+  let setAuthState = useContext(UserContext).setAuthState;
+
+  const handleSignOut = () => {
+    setAuthState(prevState => {
+      return { ...prevState, user: null, gardenId: " ", isLoggedIn: false };
+    });
+    signOut();
+  };
   return (
     <>
       <div>WELCOME</div>
-      <button onClick={signOut}>Sign Out</button>
-      <div>{user && user.displayName}</div>
       {user && user.photoUrl ? (
         <img src={user.photoUrl} alt={`${user.displayName} Account Image`} />
       ) : null}
-      {/* <div>{email}</div>
-      <div>{uid}</div> */}
+      <div>{user && user.displayName}</div>
+      <button onClick={handleSignOut}>Sign Out</button>
     </>
   );
 };

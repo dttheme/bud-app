@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./add-plant.module.scss";
 import axios from "axios";
 import { DbPlantSearch } from "../../components/organisms/add-db-plant/add-db-plant.component";
 import { Link } from "react-router-dom";
 import { PageHeading } from "../../components/atoms/page-header/page-header.component";
 import { Button } from "../../components/atoms/button/button.component";
+import { UserContext } from "../../providers/user.provider";
 // const mockResponse: any = [
 //   {
 //     slug: "hieracium-basileucum",
@@ -46,6 +47,7 @@ export const AddPlantPage = () => {
   const [responseData, setResponseData] = useState([]);
   const [pageNum, setPageNum] = useState(0);
   const [searchResultsLoaded, setSearchResultsLoaded] = useState(false);
+  const user = useContext(UserContext);
 
   const GET_PLANTS = (value: string) => {
     const currentPage = pageNum >= 1 ? pageNum : "";

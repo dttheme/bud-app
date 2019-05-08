@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
-import { unsubscribeFromAuth, UserProvider } from "./providers/user.provider";
+import { unsubscribeFromAuth } from "./providers/user.provider";
 import { config } from "./config";
 
 firebase.initializeApp(config);
@@ -23,11 +23,12 @@ export const createUserProfileDocument = async (user, additionalData?) => {
   if (!snapshot.exists) {
     const { displayName, email, photoUrl } = user;
     const createdAt = new Date();
+    console.log(displayName);
     try {
       await userRef.set({
         displayName,
         email,
-        // photoUrl,
+        photoUrl,
         createdAt,
         ...additionalData
       });

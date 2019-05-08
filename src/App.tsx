@@ -9,6 +9,7 @@ import { AddPlantPage } from "./pages/add-plant/add-plant.page";
 import { UserProfile } from "./components/organisms/user-profile/user-profile.component";
 import { Header } from "./components/organisms/header/header.component";
 import { Authentication } from "./components/organisms/authentication/authentication.component";
+import ProtectedRoute from "./utilities/protected-route";
 
 const App = () => {
   return (
@@ -16,9 +17,9 @@ const App = () => {
       <AppWrapper>
         <Header />
         <Route exact path="/" component={Home} />
-        <Route path="/add-plant" component={AddPlantPage} />
-        <Route path="/garden" component={Garden} />
-        <Route path="/account" component={UserProfile} />
+        <ProtectedRoute path="/add-plant" component={AddPlantPage} />
+        <ProtectedRoute path="/garden" component={Garden} />
+        <ProtectedRoute path="/account" component={UserProfile} />
       </AppWrapper>
     </Router>
   );

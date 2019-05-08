@@ -43,7 +43,7 @@ export const UserProfile = () => {
   };
   return (
     <>
-      <ActiveUser user={user} />
+      <ActiveUser {...user} />
       <form onSubmit={handleSubmit}>
         <input
           type="text"

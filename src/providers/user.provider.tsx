@@ -21,6 +21,15 @@ export type AuthStateType = {
   user: UserDataType | null;
   gardenId: string;
   isLoading: boolean;
+  isLoggedIn: boolean;
+  setAuthState: React.Dispatch<
+    React.SetStateAction<{
+      user: null;
+      gardenId: string;
+      isLoading: boolean;
+      isLoggedIn: boolean;
+    }>
+  >;
 };
 
 export const UserContext = createContext({} as AuthStateType);
@@ -30,16 +39,17 @@ export const UserProvider = props => {
   const [authentication, setAuthState] = useState({
     user: null,
     gardenId: " ",
-    isLoading: false
+    isLoading: false,
+    isLoggedIn: false
   });
 
   // on mount, subscribe to any user data
   useEffect(() => {
     let userRef;
     unsubscribeFromAuth = auth.onAuthStateChanged(async authState => {
-      console.log(authState);
       if (authState) {
         setAuthState(prevState => {
+          console.log("loading...");
           return { isLoading: true, ...prevState };
         });
         userRef = await createUserProfileDocument(authState);
@@ -50,7 +60,8 @@ export const UserProvider = props => {
               ...snapshot.data()
             },
             gardenId: snapshot.id,
-            isLoading: false
+            isLoading: false,
+            isLoggedIn: true
           });
         });
       }
@@ -62,15 +73,9 @@ export const UserProvider = props => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   return () =>
-  //     unsubscribeFromAuth() &&
-  //     setAuthState({ isLoading: false, user: null, gardenId: " " });
-  // }, []);
-
   console.log(authentication);
   return (
-    <UserContext.Provider value={authentication}>
+    <UserContext.Provider value={{ setAuthState, ...authentication }}>
       {props.children}
     </UserContext.Provider>
   );
