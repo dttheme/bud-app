@@ -1,13 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./app-wrapper.module.scss";
-import { Header } from "../../organisms/header/header.component";
 import { GardenProvider } from "../../../providers/garden.provider";
-import { UserProvider, UserContext } from "../../../providers/user.provider";
-import { Authentication } from "../../organisms/authentication/authentication.component";
-
-type AppWrapperType = {
-  children: React.ReactNode;
-};
+import { UserProvider } from "../../../providers/user.provider";
 
 export const collectIdsAndDocs = doc => {
   return { id: doc.id, ...doc.data() };
@@ -18,7 +12,7 @@ export const AppWrapper = props => {
     <>
       <UserProvider>
         <GardenProvider>
-          <div className={styles.pageWrapper}>{props.children}</div>
+          <div className={styles.appWrapper}>{props.children}</div>
         </GardenProvider>
       </UserProvider>
     </>

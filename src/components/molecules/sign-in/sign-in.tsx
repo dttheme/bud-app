@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { signInWithGoogle } from "../../../firebase";
 import { withRouter } from "react-router";
 import { UserContext } from "../../../providers/user.provider";
+import { PageHeading } from "../../atoms/page-header/page-header.component";
 
 export const SignIn = withRouter(({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -26,12 +27,13 @@ export const SignIn = withRouter(({ history }) => {
     await setAuthState(prevState => {
       return { ...prevState, isLoggedIn: true };
     });
+    history.push("/garden");
   };
 
   return (
     <>
       <form className="SignIn" onSubmit={handleUserSubmit}>
-        <h2>Sign In</h2>
+        <PageHeading title="Sign In" />
         <input
           type="email"
           name="email"

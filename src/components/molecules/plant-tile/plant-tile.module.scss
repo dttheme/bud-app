@@ -4,8 +4,8 @@
 .plantTile {
   background-color: #ffffff;
   border-radius: 5px;
-  border: 0.5px solid $dark-green;
-  box-shadow: 4px 4px 3px $smoke;
+  border: 0.5px solid $green;
+  box-shadow: 4px 4px 3px $light;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -13,9 +13,9 @@
 .tileTitle {
   padding: 20px 0;
   border-radius: 5px 5px 0 0;
-  background-color: $dark-green;
-  color: $smoke;
-  font-family: $helvetica;
+  background-color: $green;
+  color: $light;
+  font-family: $copyFont;
 }
 .plantTileButtonWrapper {
   margin-top: 40px;

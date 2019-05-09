@@ -1,4 +1,18 @@
-.pageWrapper {
+@import "../../../styles/media_queries";
+@import "../../../styles/colors";
+
+.appWrapper {
   text-align: center;
   margin: 10px 10px 20px 10px;
+  display: flex;
+  flex-direction: row;
+  background-color: $green;
+  height: 100vh;
+}
+
+@include for-phone-only {
+  .appWrapper {
+    flex-direction: column;
+    margin: 0;
+  }
 }

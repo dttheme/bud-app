@@ -1,6 +1,10 @@
 @import "../../../styles/font_styles";
+@import "../../../styles/colors";
 .pageHeading {
   font-size: $pageHead;
+  font-family: $displayFont;
+  text-shadow: 4px 6px 5px $dark;
+  color: $light;
   font-weight: 900;
   margin: 5px 0 20px 0;
 }

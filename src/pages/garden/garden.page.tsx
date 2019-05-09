@@ -1,15 +1,12 @@
 import * as React from "react";
 import { PlantList } from "../../components/templates/plant-list/plant-list.component";
+import { PageHeading } from "../../components/atoms/page-header/page-header.component";
 
-class Garden extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>Garden</h2>
-        <PlantList type="garden" />
-      </div>
-    );
-  }
-}
-
-export default Garden;
+export const Garden = () => {
+  return (
+    <div>
+      <PageHeading title="Garden" />
+      <PlantList type="garden" />
+    </div>
+  );
+};

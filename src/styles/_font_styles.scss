@@ -1,7 +1,9 @@
-$header: 3em;
-$pageHead: 1.8em;
+$header: 4em;
+$pageHead: 3em;
 $tileHead: 1.3em;
-$inputAndButton: 1em;
+$inputAndButton: 1.5em;
 
-$georgia: Georgia, Times New Roman, serif;
-$helvetica: Helvetica, Arial, sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Oleo+Script");
+
+$displayFont: "Oleo Script", Georgia, Times New Roman, serif;
+$copyFont: "Monserrat", Helvetica, Arial, sans-serif;

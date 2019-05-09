@@ -7,12 +7,12 @@ import { Authentication } from "../authentication/authentication.component";
 import { UserContext } from "../../../providers/user.provider";
 
 const LoggedInIcon = ({ endpoint, toolipText, ariaLabel, icon }) => (
-  <Link to={endpoint} className={styles.navText}>
-    <Tooltip text={toolipText}>
-      <IconWrapper ariaLabel={ariaLabel} className={styles.headerIcon}>
-        <span aria-label="add">{icon}</span>
-      </IconWrapper>
-    </Tooltip>
+  <Link to={endpoint} className={styles.navLink}>
+    {/* <Tooltip text={toolipText}> */}
+    {/* <IconWrapper ariaLabel={ariaLabel} className={styles.headerIcon}> */}
+    <span aria-label={ariaLabel}>{icon}</span>
+    {/* </IconWrapper> */}
+    {/* </Tooltip> */}
   </Link>
 );
 
@@ -21,7 +21,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <Link to="/" className={`${styles.navLink} ${styles.navText}`}>
-        <h1>Bud</h1>
+        <h1>Sprout Bud</h1>
       </Link>
       {user !== null ? (
         <span>
@@ -29,19 +29,19 @@ export const Header = () => {
             endpoint="/add-plant"
             toolipText="Add Plant"
             ariaLabel="Add a plant"
-            icon={"➕"}
+            icon="Add a Plant"
           />
           <LoggedInIcon
             endpoint="/garden"
             toolipText="Garden"
             ariaLabel="Go to garden"
-            icon={"🌱"}
+            icon="Garden"
           />
           <LoggedInIcon
             endpoint="/account"
             toolipText="Account"
             ariaLabel="Go to account"
-            icon={"👤"}
+            icon="Account"
           />
         </span>
       ) : null}

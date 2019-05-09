@@ -3,20 +3,20 @@
 .buttonComponent {
   width: 70%;
   max-width: 300px;
-  background-color: $dark-green;
+  background-color: $yellow;
   border: none;
   border-radius: 5px;
-  box-shadow: 5px 5px 2px $smoke;
+  box-shadow: 5px 5px 2px $light;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: $light-grey;
+  color: $red;
   padding: 10px 20px;
   margin: 20px 0;
 }
 
 .buttonComponent:hover,
 .buttonComponent:active {
-  box-shadow: 2px 2px 2px $smoke;
+  box-shadow: 2px 2px 2px $light;
   color: #ffffff;
 }

@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { SignUp } from "../../molecules/sign-up/sign-up";
-import { SignIn } from "../../molecules/sign-in/sign-in";
+import React, { useContext } from "react";
 import { ActiveUser } from "../../molecules/active-user/active-user.component";
+import { Link } from "react-router-dom";
+import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
 import { UserContext, UserDataType } from "../../../providers/user.provider";
+import styles from "./authentication.module.scss";
 
 export const Authentication = () => {
   let user = useContext(UserContext).user;
@@ -14,10 +15,15 @@ export const Authentication = () => {
   }
   if (!loggedIn && !loading) {
     return (
-      <>
-        <SignUp />
-        <SignIn />
-      </>
+      <div className={styles.signWrapper}>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          <LinkWrapper>Sign Up</LinkWrapper>
+        </Link>
+
+        <Link to="/signin" style={{ textDecoration: "none" }}>
+          <LinkWrapper>Sign In</LinkWrapper>
+        </Link>
+      </div>
     );
   } else if (!loading && loggedIn) {
     return <ActiveUser {...user as UserDataType} />;

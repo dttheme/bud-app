@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { auth, createUserProfileDocument } from "../../../firebase";
 import { Redirect, withRouter } from "react-router";
+import { PageHeading } from "../../atoms/page-header/page-header.component";
 
 export const SignUp = withRouter(({ history }) => {
   const [signUp, setSignUp] = useState({
@@ -35,13 +36,13 @@ export const SignUp = withRouter(({ history }) => {
       email: "",
       password: ""
     });
-    history.push("/add-plant");
+    await history.push("/add-plant");
     console.log("success!");
   };
 
   return (
     <form className="SignUp" onSubmit={handleSubmit}>
-      <h2>Sign Up</h2>
+      <PageHeading title="Sign Up" />
       <input
         type="text"
         name="display_name"
