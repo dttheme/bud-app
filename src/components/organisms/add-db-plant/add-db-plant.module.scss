@@ -1,9 +1,10 @@
+@import "../../../styles/font_styles";
 .searchSorry {
-  font-size: 30px;
+  font-size: $large;
 }
 .loadingFlower {
   margin-top: 20px;
-  font-size: 40px;
+  font-size: $large;
   animation: rotation 2s infinite linear;
   -webkit-animation: rotation 2s infinite linear;
 }

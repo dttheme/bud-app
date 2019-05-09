@@ -23,10 +23,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-input {
+
+input,
+button {
+  background: $light;
   width: 100%;
-  border: 3px solid $light;
+  border: 1px solid $dark;
   border-radius: 5px;
   padding: 10px;
-  font-size: $inputAndButton;
+  font-size: $small;
 }
+// input {
+
+// }
+// button {
+
+// }

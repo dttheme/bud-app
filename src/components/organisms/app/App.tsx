@@ -11,11 +11,13 @@ import { SignIn } from "../../molecules/sign-in/sign-in";
 import { SignUp } from "../../molecules/sign-up/sign-up";
 import { UserProfile } from "../user-profile/user-profile.component";
 import "./App.module.scss";
+import { Authentication } from "../authentication/authentication.component";
 
 const App = () => {
   return (
     <Router history={history}>
       <AppWrapper>
+        <Authentication />
         <Header />
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={SignUp} />

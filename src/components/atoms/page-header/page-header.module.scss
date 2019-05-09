@@ -1,10 +1,10 @@
 @import "../../../styles/font_styles";
 @import "../../../styles/colors";
 .pageHeading {
-  font-size: $pageHead;
+  font-size: $large;
+  color: $green;
+  text-shadow: 2px 2px 2px $yellow;
   font-family: $displayFont;
-  text-shadow: 4px 6px 5px $dark;
-  color: $light;
   font-weight: 900;
   margin: 5px 0 20px 0;
 }

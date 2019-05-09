@@ -1,9 +1,10 @@
 @import "../../../styles/colors";
 @import "../../../styles/font_styles";
 .linkWrapper {
-  font-size: 2.5em;
+  font-weight: 900;
+  font-size: $medium;
   font-family: $displayFont;
   text-decoration: none;
-  color: $light;
-  text-shadow: 3px 5px 5px $red;
+  color: $green;
+  text-shadow: 2px 3px 1px $yellow;
 }

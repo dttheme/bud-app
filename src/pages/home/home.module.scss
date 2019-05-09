@@ -1,0 +1,12 @@
+@import "../../styles/colors";
+.homePageWrapper {
+  background: url("../../images/annie-spratt-42051-unsplash_edit.jpg");
+  background-size: cover;
+  padding: 40px;
+}
+.homePageContent {
+  border-radius: 5px;
+  background-color: $light;
+  height: 50vh;
+  box-shadow: 3px 3px 10px $dark;
+}

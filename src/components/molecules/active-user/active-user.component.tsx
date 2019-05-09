@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { signOut } from "../../../firebase";
 import { UserDataType, UserContext } from "../../../providers/user.provider";
+import styles from "./active-user.module.scss";
 
 // type ActiveUserType = {
 //   user: UserDataType;
@@ -17,13 +18,22 @@ export const ActiveUser = (user: UserDataType) => {
     signOut();
   };
   return (
-    <>
-      <div>WELCOME</div>
-      {user && user.photoUrl ? (
-        <img src={user.photoUrl} alt={`${user.displayName} Account Image`} />
-      ) : null}
-      <div>{user && user.displayName}</div>
-      <button onClick={handleSignOut}>Sign Out</button>
-    </>
+    <div className={styles.activeUserWrapper}>
+      <div className={styles.activeUserContent}>
+        {user && user.photoUrl ? (
+          <div className={styles.activeUserImageWrapper}>
+            <img
+              src={user.photoUrl}
+              className={styles.activeUserImage}
+              alt={`${user.displayName} Account Image`}
+            />
+          </div>
+        ) : null}
+        <div className={styles.displayName}>{user && user.displayName}</div>
+      </div>
+      <button className={styles.signOutButton} onClick={handleSignOut}>
+        Sign Out
+      </button>
+    </div>
   );
 };
