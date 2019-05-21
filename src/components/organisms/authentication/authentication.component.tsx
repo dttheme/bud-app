@@ -10,7 +10,7 @@ export const Authentication = () => {
   let loggedIn = useContext(UserContext).isLoggedIn;
   let loading = useContext(UserContext).isLoading;
 
-  if (loggedIn && loading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
   if (!loggedIn && !loading) {

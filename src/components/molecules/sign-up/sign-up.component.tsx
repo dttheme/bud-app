@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { auth, createUserProfileDocument } from "../../../firebase";
-import { Redirect, withRouter } from "react-router";
+import { withRouter } from "react-router";
 import { PageHeading } from "../../atoms/page-header/page-header.component";
+import styles from "./sign-up.module.scss";
+import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
 
 export const SignUp = withRouter(({ history }) => {
   const [signUp, setSignUp] = useState({
@@ -41,30 +43,34 @@ export const SignUp = withRouter(({ history }) => {
   };
 
   return (
-    <form className="SignUp" onSubmit={handleSubmit}>
-      <PageHeading title="Sign Up" />
-      <input
-        type="text"
-        name="display_name"
-        placeholder="Display Name"
-        value={signUp.display_name}
-        onChange={handleChange}
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={signUp.email}
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={signUp.password}
-        onChange={handleChange}
-      />
-      <input type="submit" value="Sign Up" />
-    </form>
+    <PageWrapper>
+      <div className={styles.signup}>
+        <form onSubmit={handleSubmit}>
+          <PageHeading title="Sign Up" />
+          <input
+            type="text"
+            name="display_name"
+            placeholder="Display Name"
+            value={signUp.display_name}
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={signUp.email}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={signUp.password}
+            onChange={handleChange}
+          />
+          <input type="submit" value="Sign Up" />
+        </form>
+      </div>
+    </PageWrapper>
   );
 });

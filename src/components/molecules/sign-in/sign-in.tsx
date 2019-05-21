@@ -3,6 +3,8 @@ import { signInWithGoogle } from "../../../firebase";
 import { withRouter } from "react-router";
 import { UserContext } from "../../../providers/user.provider";
 import { PageHeading } from "../../atoms/page-header/page-header.component";
+import styles from "./sign-in.module.scss";
+import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
 
 export const SignIn = withRouter(({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -31,26 +33,28 @@ export const SignIn = withRouter(({ history }) => {
   };
 
   return (
-    <>
-      <form className="SignIn" onSubmit={handleUserSubmit}>
-        <PageHeading title="Sign In" />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={user.email}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={user.password}
-          onChange={handleChange}
-        />
-        <input type="submit" value="Sign In" />
-      </form>
-      <button onClick={handleGoogleSubmit}>Sign In With Google</button>
-    </>
+    <PageWrapper>
+      <div className={styles.signin}>
+        <form className="SignIn" onSubmit={handleUserSubmit}>
+          <PageHeading title="Sign In" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={user.email}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleChange}
+          />
+          <input type="submit" value="Sign In" />
+        </form>
+        <button onClick={handleGoogleSubmit}>Sign In With Google</button>
+      </div>
+    </PageWrapper>
   );
 });

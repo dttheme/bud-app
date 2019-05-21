@@ -1,8 +1,8 @@
-import React, { useContext, useState, useRef } from "react";
-import { ActiveUser } from "../../molecules/active-user/active-user.component";
+import React, { useContext, useRef, useState } from "react";
+import { firestore, storage } from "../../../firebase";
+import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
 import { UserContext } from "../../../providers/user.provider";
 import { UserDataType } from "../../../providers/garden.provider";
-import { firestore, storage } from "../../../firebase";
 
 export const UserProfile = () => {
   const [displayName, setDisplayName] = useState("");
@@ -42,8 +42,7 @@ export const UserProfile = () => {
     }
   };
   return (
-    <>
-      <ActiveUser {...user} />
+    <PageWrapper>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -55,6 +54,6 @@ export const UserProfile = () => {
         <input type="file" ref={imageRef} />
         <input type="submit" />
       </form>
-    </>
+    </PageWrapper>
   );
 };

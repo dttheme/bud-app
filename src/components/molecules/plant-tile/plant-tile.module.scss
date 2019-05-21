@@ -2,7 +2,7 @@
 @import "../../../styles/font_styles";
 
 .plantTile {
-  background-color: #ffffff;
+  background-color: $light;
   border-radius: 5px;
   border: 0.5px solid $green;
   box-shadow: 4px 4px 3px $light;
@@ -28,6 +28,6 @@
 
 @media (max-width: 30rem) {
   .plantTile {
-    width: 100%;
+    width: 90%;
   }
 }

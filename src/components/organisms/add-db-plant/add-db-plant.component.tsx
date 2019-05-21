@@ -1,22 +1,12 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import styles from "./add-db-plant.module.scss";
-import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
 import { Button } from "../../atoms/button/button.component";
+import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
 import { Link } from "react-router-dom";
-import { PlantList } from "../../templates/plant-list/plant-list.component";
 import { PlantDataType } from "../../../providers/garden.provider";
-
-type DbPlantSearchProps = {
-  searchResultsLoaded: boolean;
-  queryString: string;
-  handleInputChange: Function;
-  handleSearchClick: Function;
-  handlePaginationClick: Function;
-  isLoading: boolean;
-  responseData: PlantDataType[];
-  tryAgain: Function;
-  pageNum: number;
-};
+import { PlantList } from "../../templates/plant-list/plant-list.component";
+import { UserContext } from "../../../providers/user.provider";
 
 type dbPaginationProps = {
   handlePaginationClick: Function;
@@ -56,19 +46,59 @@ const DbPagination = ({
   </>
 );
 
-export const DbPlantSearch = ({
-  handleInputChange,
-  handleSearchClick,
-  isLoading,
-  queryString,
-  responseData,
-  searchResultsLoaded,
-  tryAgain,
-  pageNum,
-  handlePaginationClick
-}: DbPlantSearchProps) => {
+export const DbPlantSearch = () => {
+  const [queryString, setQueryString] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [responseData, setResponseData] = useState([]);
+  const [pageNum, setPageNum] = useState(0);
+  const [searchResultsLoaded, setSearchResultsLoaded] = useState(false);
+  const user = useContext(UserContext);
+
+  const GET_PLANTS = (value: string) => {
+    const currentPage = pageNum >= 1 ? pageNum : "";
+    axios({
+      method: "get",
+      url:
+        "https://cors-anywhere.herokuapp.com/" +
+        `https://trefle.io/api/plants/?token=${
+          process.env.REACT_APP_TREFLE_KEY
+        }&page_size=4&q=${value}&page=${currentPage}`
+    })
+      .then(response => {
+        console.log(response.data);
+        setResponseData(response.data);
+      })
+      .then(() => {
+        setIsLoading(false);
+        setSearchResultsLoaded(true);
+      });
+  };
+
+  // TODO: async if using onChange
+  const handleInputChange = (value: string) => {
+    setQueryString(value);
+  };
+  const handleSearchClick = (value: string) => (e: any) => {
+    e.preventDefault();
+    setIsLoading(true);
+    GET_PLANTS(value);
+  };
+  const handlePageNumber = (type: string) => {
+    type === "increment" ? setPageNum(pageNum + 1) : setPageNum(pageNum - 1);
+  };
+  const handlePaginationClick = (type: string) => (e: any) => {
+    e.preventDefault();
+    handlePageNumber(type);
+    GET_PLANTS(queryString);
+  };
+  const tryAgain = () => {
+    setQueryString("");
+    setResponseData([]);
+    setPageNum(0);
+    setSearchResultsLoaded(false);
+  };
   return (
-    <>
+    <div>
       <form>
         {searchResultsLoaded ? null : (
           <>
@@ -107,6 +137,6 @@ export const DbPlantSearch = ({
         pageNum={pageNum}
         responseDataLength={responseData.length}
       />
-    </>
+    </div>
   );
 };

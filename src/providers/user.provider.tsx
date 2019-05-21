@@ -47,11 +47,12 @@ export const UserProvider = props => {
   useEffect(() => {
     let userRef;
     unsubscribeFromAuth = auth.onAuthStateChanged(async authState => {
+      setAuthState(prevState => {
+        console.log("Loading...");
+        return { isLoading: true, ...prevState };
+      });
+      console.log(authentication);
       if (authState) {
-        setAuthState(prevState => {
-          console.log("loading...");
-          return { isLoading: true, ...prevState };
-        });
         userRef = await createUserProfileDocument(authState);
         userRef.onSnapshot(snapshot => {
           setAuthState({
@@ -64,6 +65,7 @@ export const UserProvider = props => {
             isLoggedIn: true
           });
         });
+      } else {
       }
     });
     return () =>

@@ -1,5 +1,11 @@
+@import "../../../styles/colors";
+@import "../../../styles/font_styles";
 .signWrapper {
   width: 100%;
+  height: 20vh;
   display: flex;
   justify-content: space-around;
+  align-self: baseline;
+  background-color: $light;
+  align-items: center;
 }

@@ -2,15 +2,17 @@
 @import "../../../styles/colors";
 
 .activeUserWrapper {
-  background-image: linear-gradient($yellow, $light);
+  background-image: linear-gradient($light, $yellow);
+  border-bottom: 1px solid $red;
   z-index: 2;
-  margin-bottom: -4px;
-  // background: $light;
   padding: 5px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 .activeUserContent {
   display: flex;

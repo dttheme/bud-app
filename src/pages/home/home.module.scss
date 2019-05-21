@@ -1,12 +1,21 @@
 @import "../../styles/colors";
+@import "../../styles/font_styles";
+
 .homePageWrapper {
   background: url("../../images/annie-spratt-42051-unsplash_edit.jpg");
   background-size: cover;
   padding: 40px;
+  display: flex;
 }
 .homePageContent {
+  font-size: $large;
+  align-self: center;
+  align-content: center;
+  padding: 10px 20px;
   border-radius: 5px;
-  background-color: $light;
-  height: 50vh;
+  background-color: rgba($light, 0.8);
   box-shadow: 3px 3px 10px $dark;
+  mark {
+    background-color: $yellow;
+  }
 }

@@ -33,7 +33,7 @@ header {
   }
   h1:active,
   h1:hover {
-    color: #ffffff;
+    color: $red;
     text-shadow: 2px 2px 1px $yellow;
   }
 }
@@ -43,6 +43,7 @@ header {
 
 @include for-phone-only {
   header {
+    height: 40%;
     width: 100%;
     padding: 0 5px;
     display: flex;
