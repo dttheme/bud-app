@@ -6,7 +6,7 @@ import { PlantList } from "../../components/templates/plant-list/plant-list.comp
 export const Garden = () => {
   return (
     <PageWrapper>
-      <div className={styles.garden}>
+      <div className={styles.gardenPageWrapper}>
         <PageHeading title="Garden" />
         <PlantList type="garden" />
       </div>
