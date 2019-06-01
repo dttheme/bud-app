@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import styles from "./header.module.scss";
 import { Link } from "react-router-dom";
-import { Tooltip } from "../../atoms/tooltip/tooltip.component";
-import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
-import { Authentication } from "../authentication/authentication.component";
 import { UserContext } from "../../../providers/user.provider";
 import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
+import sproutIcon from "../../../images/icon.png";
 
 const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
   <Link
@@ -13,9 +11,7 @@ const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
     style={{ textDecoration: "none" }}
     className={styles.authLink}
   >
-    <LinkWrapper>
-      <span aria-label={ariaLabel}>{content}</span>
-    </LinkWrapper>
+    <span aria-label={ariaLabel}>{content}</span>
   </Link>
 );
 
@@ -23,7 +19,15 @@ export const Header = () => {
   const user = useContext(UserContext).user;
   return (
     <header className={styles.header}>
-      <Link to="/" className={``} style={{ textDecoration: "none" }}>
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          display: "flex",
+          alignItems: "center"
+        }}
+      >
+        <img src={sproutIcon} alt="A sprout" className={styles.sproutIcon} />
         <h1>Sprout Bud</h1>
       </Link>
       {user !== null ? (

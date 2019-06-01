@@ -3,16 +3,9 @@
 
 .appWrapper {
   text-align: center;
-  margin: 10px 10px 20px 10px;
+  // margin: 10px 10px 20px 10px;
   display: flex;
-  flex-direction: row;
-  background-color: $green;
+  flex-direction: column;
+  background-color: $yellow;
   height: 100vh;
-}
-
-@include for-phone-only {
-  .appWrapper {
-    flex-direction: column;
-    margin: 0;
-  }
 }

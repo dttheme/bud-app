@@ -3,6 +3,8 @@ import { firestore, storage } from "../../../firebase";
 import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
 import { UserContext } from "../../../providers/user.provider";
 import { UserDataType } from "../../../providers/garden.provider";
+import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
+import { PageHeading } from "../../atoms/page-header/page-header.component";
 
 export const UserProfile = () => {
   const [displayName, setDisplayName] = useState("");
@@ -43,17 +45,20 @@ export const UserProfile = () => {
   };
   return (
     <PageWrapper>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={displayName}
-          name="displayName"
-          onChange={handleChange}
-          placeholder="Display Name"
-        />
-        <input type="file" ref={imageRef} />
-        <input type="submit" />
-      </form>
+      <ContentWrapper>
+        <PageHeading title="Account" />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={displayName}
+            name="displayName"
+            onChange={handleChange}
+            placeholder="Display Name"
+          />
+          <input type="file" ref={imageRef} />
+          <input type="submit" />
+        </form>
+      </ContentWrapper>
     </PageWrapper>
   );
 };

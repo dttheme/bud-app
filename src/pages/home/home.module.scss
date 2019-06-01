@@ -4,17 +4,13 @@
 .homePageWrapper {
   background: url("../../images/annie-spratt-42051-unsplash_edit.jpg");
   background-size: cover;
-  padding: 40px;
+  height: 100%;
   display: flex;
 }
 .homePageContent {
-  font-size: $large;
-  align-self: center;
   align-content: center;
-  padding: 10px 20px;
-  border-radius: 5px;
-  background-color: rgba($light, 0.8);
-  box-shadow: 3px 3px 10px $dark;
+  padding: 0 10px;
+  font-size: $large;
   mark {
     background-color: $yellow;
   }

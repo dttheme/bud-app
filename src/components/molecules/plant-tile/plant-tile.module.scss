@@ -1,11 +1,11 @@
 @import "../../../styles/colors";
 @import "../../../styles/font_styles";
+@import "../../../styles/media_queries";
 
 .plantTile {
   background-color: $light;
   border-radius: 5px;
   border: 0.5px solid $green;
-  box-shadow: 4px 4px 3px $dark;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -15,6 +15,7 @@
   border-radius: 5px 5px 0 0;
   background-color: $green;
   color: $light;
+  font-size: $small;
   font-family: $copyFont;
 }
 .plantTileButtonWrapper {
@@ -26,7 +27,13 @@
   }
 }
 
-@media (max-width: 30rem) {
+@include for-tablet-portrait-up {
+  .plantTile {
+    width: 45%;
+  }
+}
+
+@include for-phone-only {
   .plantTile {
     width: 90%;
   }

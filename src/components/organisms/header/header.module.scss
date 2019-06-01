@@ -2,26 +2,25 @@
 @import "../../../styles/font_styles";
 @import "../../../styles/media_queries";
 
-header {
+.header {
   z-index: 1;
   background: $light;
   overflow: hidden;
   padding-top: 7px;
-  width: 20%;
-  height: 25vh;
+  width: 100%;
+  height: 200px;
   max-width: 100vw;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
   align-items: center;
-  box-shadow: 0 7px 10px $dark;
-  span {
+  box-shadow: 0 1px 15px $dark;
+  .headerLinks {
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
   h1 {
-    margin: 20px 0;
+    margin: 0;
     font-weight: 900;
     font-size: $extraLarge;
     letter-spacing: 3px;
@@ -36,20 +35,25 @@ header {
     color: $red;
     text-shadow: 2px 2px 1px $yellow;
   }
+  .sproutIcon {
+    max-width: 60px;
+    height: 60px;
+  }
 }
 .authLink {
   margin: 0 15px;
+  color: $green;
+  font-family: $displayFont;
+  text-shadow: 1px 1px 1px $yellow;
 }
-
 @include for-phone-only {
-  header {
-    height: 40%;
+  .header {
     width: 100%;
     padding: 0 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    span {
+    .headerLinks {
       width: 100%;
       margin: 5px 0;
       display: flex;
@@ -58,5 +62,27 @@ header {
       font-size: $medium;
       order: 2;
     }
+    .authLink {
+      font-size: $medium;
+    }
+  }
+}
+@include for-tablet-portrait-up {
+  .header {
+    justify-content: space-between;
+    img {
+      margin-left: 10px;
+    }
+    .authLink {
+      font-size: $smedium;
+      align-items: center;
+      width: 50%;
+      justify-content: space-around;
+    }
+  }
+}
+@include for-tablet-landscape-up {
+  .header .authLink {
+    font-size: $medium;
   }
 }

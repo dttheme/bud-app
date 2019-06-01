@@ -4,6 +4,9 @@ import { withRouter } from "react-router";
 import { PageHeading } from "../../atoms/page-header/page-header.component";
 import styles from "./sign-up.module.scss";
 import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
+import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
+import { Link } from "react-router-dom";
+import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
 
 export const SignUp = withRouter(({ history }) => {
   const [signUp, setSignUp] = useState({
@@ -44,7 +47,7 @@ export const SignUp = withRouter(({ history }) => {
 
   return (
     <PageWrapper>
-      <div className={styles.signup}>
+      <ContentWrapper>
         <form onSubmit={handleSubmit}>
           <PageHeading title="Sign Up" />
           <input
@@ -70,7 +73,13 @@ export const SignUp = withRouter(({ history }) => {
           />
           <input type="submit" value="Sign Up" />
         </form>
-      </div>
+        <div>
+          Got a Google account?{" "}
+          <Link to="/signin" style={{ color: "green" }}>
+            Sign in.
+          </Link>
+        </div>
+      </ContentWrapper>
     </PageWrapper>
   );
 });

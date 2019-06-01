@@ -7,7 +7,7 @@ import { Header } from "../header/header.component";
 import { Home } from "../../../pages/home/home.page";
 import { ProtectedRoute } from "../../../utilities/protected-route";
 import { Route, Router } from "react-router-dom";
-import { SignIn } from "../../molecules/sign-in/sign-in";
+import { SignIn } from "../../molecules/sign-in/sign-in.component";
 import { SignUp } from "../../molecules/sign-up/sign-up.component";
 import { UserProfile } from "../user-profile/user-profile.component";
 import "./App.module.scss";

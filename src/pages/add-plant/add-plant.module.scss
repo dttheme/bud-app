@@ -1,5 +1,12 @@
 @import "../../styles/colors";
 
 .addPlantWrapper {
+  height: 100%;
   background-color: $light;
+  align-self: center;
+  margin: 30px;
+  padding: 5px 0 15px 0;
+  background-color: rgba($light, 0.7);
+  box-shadow: 3px 3px 10px $dark;
+  border-radius: 5px;
 }

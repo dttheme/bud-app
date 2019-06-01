@@ -1,0 +1,25 @@
+@import "../../../styles/colors";
+@import "../../../styles/media_queries";
+
+.contentWrapper {
+  align-self: center;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 5px 0 15px 0;
+  background-color: rgba($light, 0.8);
+  border: solid 1px $red;
+  border-radius: 5px;
+  width: 90%;
+}
+
+@include for-phone-only {
+  .contentWrapper {
+    margin: 20px;
+  }
+}
+
+@include for-tablet-landscape-up {
+  .contentWrapper {
+    width: 70%;
+  }
+}

@@ -5,6 +5,8 @@ import { UserContext } from "../../../providers/user.provider";
 import { PageHeading } from "../../atoms/page-header/page-header.component";
 import styles from "./sign-in.module.scss";
 import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
+import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
+import { Link } from "react-router-dom";
 
 export const SignIn = withRouter(({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -34,7 +36,7 @@ export const SignIn = withRouter(({ history }) => {
 
   return (
     <PageWrapper>
-      <div className={styles.signin}>
+      <ContentWrapper>
         <form className="SignIn" onSubmit={handleUserSubmit}>
           <PageHeading title="Sign In" />
           <input
@@ -53,8 +55,16 @@ export const SignIn = withRouter(({ history }) => {
           />
           <input type="submit" value="Sign In" />
         </form>
-        <button onClick={handleGoogleSubmit}>Sign In With Google</button>
-      </div>
+        <button className={styles.googleSignIn} onClick={handleGoogleSubmit}>
+          Sign In With Google
+        </button>
+        <div>
+          Don't have an account?{" "}
+          <Link to="/signin" style={{ color: "green" }}>
+            Sign up.
+          </Link>
+        </div>
+      </ContentWrapper>
     </PageWrapper>
   );
 });

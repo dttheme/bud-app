@@ -1,5 +1,17 @@
+@import "../../../styles/media_queries";
+
 .plantListWrapper {
-  background-color: red;
+  width: 100%;
   height: 100%;
-  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@include for-tablet-portrait-up {
+  .plantListWrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 }
