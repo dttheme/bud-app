@@ -38,7 +38,6 @@ export const PageWrapper = props => {
         backgroundRepeat: "no-repeat"
       }}
     >
-      {/* {getRandomImage(backgroundArray)} */}
       {user.user === null ? null : <DbPlantSearch />}
       {props.children}
     </div>

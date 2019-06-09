@@ -38,6 +38,7 @@ export const Header = () => {
         <h1>Sprout Bud</h1>
       </Link>
       <Authentication />
+      <Weather />
       {user !== null ? (
         // <div>
         <span className={styles.headerLinks}>
@@ -53,6 +54,7 @@ export const Header = () => {
             ariaLabel="Go to garden"
             content="Garden"
           />
+          <hr />
           <AuthenticatedLinks
             endpoint="/account"
             toolipText="Account"
@@ -60,11 +62,7 @@ export const Header = () => {
             content="Account"
           />
         </span>
-      ) : //   {/* <div>
-      //     <Weather />
-      //   </div>
-      // </div> */}
-      null}
+      ) : null}
     </header>
   );
 };

@@ -51,7 +51,7 @@ export const UserProvider = props => {
         console.log("Loading...");
         return { isLoading: true, ...prevState };
       });
-      console.log(authentication);
+      // console.log(authentication);
       if (authState) {
         userRef = await createUserProfileDocument(authState);
         userRef.onSnapshot(snapshot => {
@@ -75,7 +75,7 @@ export const UserProvider = props => {
       });
   }, []);
 
-  console.log(authentication);
+  // console.log(authentication);
   return (
     <UserContext.Provider value={{ setAuthState, ...authentication }}>
       {props.children}
