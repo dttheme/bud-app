@@ -6,23 +6,22 @@
   z-index: 1;
   background: $light;
   overflow: hidden;
-  padding-top: 7px;
-  width: 100%;
-  height: 200px;
-  max-width: 100vw;
+  max-width: 20vw;
+  min-width: 20vw;
+  height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  box-shadow: 0 1px 15px $dark;
+  justify-content: flex-start;
+  // box-shadow: 0 1px 15px $dark;
   .headerLinks {
-    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
   h1 {
-    margin: 0;
-    font-weight: 900;
-    font-size: $extraLarge;
+    margin: 20px 5px;
+    font-size: $large;
     letter-spacing: 3px;
     cursor: pointer;
     color: $green;
@@ -36,15 +35,17 @@
     text-shadow: 2px 2px 1px $yellow;
   }
   .sproutIcon {
-    max-width: 60px;
-    height: 60px;
+    margin: 5px;
+    max-width: 40px;
+    height: 40px;
   }
 }
 .authLink {
   margin: 0 15px;
   color: $green;
-  font-family: $displayFont;
-  text-shadow: 1px 1px 1px $yellow;
+  font-family: $copyFont;
+  font-size: $medium;
+  // text-shadow: 1px 1px 1px $yellow;
 }
 @include for-phone-only {
   .header {
@@ -69,10 +70,6 @@
 }
 @include for-tablet-portrait-up {
   .header {
-    justify-content: space-between;
-    img {
-      margin-left: 10px;
-    }
     .authLink {
       font-size: $smedium;
       align-items: center;
@@ -81,8 +78,8 @@
     }
   }
 }
-@include for-tablet-landscape-up {
-  .header .authLink {
-    font-size: $medium;
-  }
-}
+// @include for-tablet-landscape-up {
+//   .header .authLink {
+//     font-size: $medium;
+//   }
+// }

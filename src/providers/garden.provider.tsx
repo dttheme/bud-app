@@ -56,7 +56,6 @@ export const GardenProvider = props => {
   useEffect(() => () => unsubscribeFromFirestore);
 
   const { children } = props;
-  // console.log(plants);
   return (
     <GardenContext.Provider value={{ gardenId, plants }}>
       {children}

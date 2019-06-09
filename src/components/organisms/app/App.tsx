@@ -24,7 +24,6 @@ const App = () => {
         <ProtectedRoute path="/add-plant" component={AddPlantPage} />
         <ProtectedRoute path="/garden" component={Garden} />
         <ProtectedRoute path="/account" component={UserProfile} />
-        <Authentication />
       </AppWrapper>
     </Router>
   );

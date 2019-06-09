@@ -1,6 +1,25 @@
 @import "../../../styles/font_styles";
+@import "../../../styles/colors";
 .searchSorry {
   font-size: $large;
+}
+.searchBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  input {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    border: 0;
+  }
+  .searchButton {
+    background-color: $red;
+    color: $light;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
 }
 .loadingFlower {
   margin-top: 20px;

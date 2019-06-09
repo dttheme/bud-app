@@ -9,7 +9,7 @@ export const Home = () => (
     <div className={styles.homePageWrapper}>
       <ContentWrapper>
         <p className={styles.homePageContent}>
-          Manage your plants and have a <mark>happier harvest</mark>
+          Manage your plants and have a <mark>happier harvest</mark>.
         </p>
       </ContentWrapper>
     </div>

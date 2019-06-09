@@ -7,12 +7,12 @@ import { ContentWrapper } from "../../components/templates/content-wrapper/conte
 export const Garden = () => {
   return (
     <PageWrapper>
-      <div className={styles.gardenWrapper}>
-        <ContentWrapper>
-          <PageHeading title="Garden" />
-          <PlantList type="garden" />
-        </ContentWrapper>
-      </div>
+      {/* <div className={styles.gardenWrapper}> */}
+      <ContentWrapper>
+        <PageHeading title="Garden" />
+        <PlantList type="garden" />
+      </ContentWrapper>
+      {/* </div> */}
     </PageWrapper>
   );
 };

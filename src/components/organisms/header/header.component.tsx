@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import styles from "./header.module.scss";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../providers/user.provider";
+import { Weather } from "../weather/weather.component";
+import { Authentication } from "../authentication/authentication.component";
 import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
-import sproutIcon from "../../../images/icon.png";
 
 const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
   <Link
@@ -11,7 +12,9 @@ const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
     style={{ textDecoration: "none" }}
     className={styles.authLink}
   >
-    <span aria-label={ariaLabel}>{content}</span>
+    <span aria-label={ariaLabel}>
+      <LinkWrapper>{content}</LinkWrapper>
+    </span>
   </Link>
 );
 
@@ -27,17 +30,23 @@ export const Header = () => {
           alignItems: "center"
         }}
       >
-        <img src={sproutIcon} alt="A sprout" className={styles.sproutIcon} />
+        <img
+          src="images/icon.png"
+          alt="A sprout"
+          className={styles.sproutIcon}
+        />
         <h1>Sprout Bud</h1>
       </Link>
+      <Authentication />
       {user !== null ? (
-        <span>
-          <AuthenticatedLinks
+        // <div>
+        <span className={styles.headerLinks}>
+          {/* <AuthenticatedLinks
             endpoint="/add-plant"
             toolipText="Add Plant"
             ariaLabel="Add a plant"
             content="Add a Plant"
-          />
+          /> */}
           <AuthenticatedLinks
             endpoint="/garden"
             toolipText="Garden"
@@ -51,7 +60,11 @@ export const Header = () => {
             content="Account"
           />
         </span>
-      ) : null}
+      ) : //   {/* <div>
+      //     <Weather />
+      //   </div>
+      // </div> */}
+      null}
     </header>
   );
 };

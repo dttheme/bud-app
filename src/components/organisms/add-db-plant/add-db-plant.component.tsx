@@ -3,46 +3,14 @@ import React, { useContext, useState } from "react";
 import styles from "./add-db-plant.module.scss";
 import { Button } from "../../atoms/button/button.component";
 import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
-import { Link } from "react-router-dom";
-import { PlantDataType } from "../../../providers/garden.provider";
 import { PlantList } from "../../templates/plant-list/plant-list.component";
 import { UserContext } from "../../../providers/user.provider";
-
-type dbPaginationProps = {
-  handlePaginationClick: Function;
-  pageNum: number;
-  responseDataLength: number;
-};
+import { Pagination } from "../../molecules/pagination/pagination.component";
 
 const SorryNotFound = ({ tryAgain }) => (
   <>
     <div className="searchSorry">Sorry, we couldn't find that plant</div>
     <button onClick={tryAgain}>Search Again</button>
-  </>
-);
-
-const DbPagination = ({
-  handlePaginationClick,
-  pageNum,
-  responseDataLength
-}: dbPaginationProps) => (
-  <>
-    {pageNum > 0 ? (
-      <IconWrapper
-        ariaLabel="Previous results page"
-        onClick={handlePaginationClick("decrement")}
-      >
-        👈
-      </IconWrapper>
-    ) : null}
-    {responseDataLength == 4 ? (
-      <IconWrapper
-        ariaLabel="Next results page"
-        onClick={handlePaginationClick("increment")}
-      >
-        👉
-      </IconWrapper>
-    ) : null}
   </>
 );
 
@@ -62,7 +30,7 @@ export const DbPlantSearch = () => {
         "https://cors-anywhere.herokuapp.com/" +
         `https://trefle.io/api/plants/?token=${
           process.env.REACT_APP_TREFLE_KEY
-        }&page_size=4&q=${value}&page=${currentPage}`
+        }&page_size=3&q=${value}&page=${currentPage}`
     })
       .then(response => {
         console.log(response.data);
@@ -98,10 +66,10 @@ export const DbPlantSearch = () => {
     setSearchResultsLoaded(false);
   };
   return (
-    <div>
+    <div className={styles.dbResults}>
       <form>
         {searchResultsLoaded ? null : (
-          <>
+          <div className={styles.searchBar}>
             <input
               placeholder="Search plant database..."
               type="text"
@@ -111,11 +79,12 @@ export const DbPlantSearch = () => {
             />
             <Button
               className={styles.searchButton}
+              type="submit"
               onClick={handleSearchClick(queryString)}
             >
               Search
             </Button>
-          </>
+          </div>
         )}
       </form>
       {isLoading ? (
@@ -132,7 +101,7 @@ export const DbPlantSearch = () => {
               })}
         </div>
       )}
-      <DbPagination
+      <Pagination
         handlePaginationClick={handlePaginationClick}
         pageNum={pageNum}
         responseDataLength={responseData.length}

@@ -19,7 +19,7 @@ export const Authentication = () => {
         <Link to="/signup" style={{ textDecoration: "none" }}>
           <LinkWrapper>Sign Up</LinkWrapper>
         </Link>
-
+        <hr />
         <Link to="/signin" style={{ textDecoration: "none" }}>
           <LinkWrapper>Sign In</LinkWrapper>
         </Link>

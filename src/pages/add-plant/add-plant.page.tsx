@@ -13,7 +13,6 @@ export const AddPlantPage = () => {
         <div>
           from the <a href="https://trefle.io/">Trefle Plant API</a>
         </div>
-        <DbPlantSearch />
       </ContentWrapper>
     </PageWrapper>
   );

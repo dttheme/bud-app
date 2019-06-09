@@ -36,5 +36,16 @@
 @include for-phone-only {
   .plantTile {
     width: 90%;
+    height: 100px;
+  }
+  .tileTitle {
+    padding: 10px 0;
+    height: 50%;
+  }
+  .plantTileButtonWrapper {
+    margin-top: 5px;
+    button {
+      margin: 2px;
+    }
   }
 }

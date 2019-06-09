@@ -2,9 +2,11 @@
 @import "../../styles/font_styles";
 
 .homePageWrapper {
-  background: url("../../images/annie-spratt-42051-unsplash_edit.jpg");
+  // background: url("../../images/annie-spratt-42051-unsplash_edit.jpg") no-repeat;
   background-size: cover;
   height: 100%;
+  width: 100%;
+  min-width: 100%;
   display: flex;
 }
 .homePageContent {
@@ -13,5 +15,9 @@
   font-size: $large;
   mark {
     background-color: $yellow;
+    font-family: $displayFont;
+    font-size: $extraLarge;
+    color: $green;
+    padding: 0 5px;
   }
 }
