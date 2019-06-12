@@ -24,19 +24,22 @@ code {
     monospace;
 }
 
-input,
-button {
+input {
   background: $light;
-  width: 100%;
   border: 1px solid $dark;
   border-radius: 5px;
   padding: 20px;
   font-size: $small;
-  margin: 5px 0;
-}
-input {
-  width: 90%;
-  // padding: 20px;
-  // margin: 5px;
+  width: 100%;
+  max-width: 300px;
+  padding: 20px;
   font-size: $small;
+  margin: 2px;
+}
+
+input:focus,
+button:focus,
+a:focus {
+  outline: 3px solid $red;
+  border-radius: 0;
 }

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
 import { UserContext, UserDataType } from "../../../providers/user.provider";
 import styles from "./authentication.module.scss";
+import { Button } from "../../atoms/button/button.component";
 
 export const Authentication = () => {
   let user = useContext(UserContext).user;
@@ -17,11 +18,11 @@ export const Authentication = () => {
     return (
       <div className={styles.signWrapper}>
         <Link to="/signup" style={{ textDecoration: "none" }}>
-          <LinkWrapper>Sign Up</LinkWrapper>
+          <Button>Sign Up</Button>
         </Link>
         <hr />
         <Link to="/signin" style={{ textDecoration: "none" }}>
-          <LinkWrapper>Sign In</LinkWrapper>
+          <Button>Sign In</Button>
         </Link>
       </div>
     );

@@ -9,9 +9,8 @@ import { ProtectedRoute } from "../../../utilities/protected-route";
 import { Route, Router } from "react-router-dom";
 import { SignIn } from "../../molecules/sign-in/sign-in.component";
 import { SignUp } from "../../molecules/sign-up/sign-up.component";
-import { UserProfile } from "../user-profile/user-profile.component";
+import { Account } from "../account/account.component";
 import "./App.module.scss";
-import { Authentication } from "../authentication/authentication.component";
 
 const App = () => {
   return (
@@ -23,7 +22,7 @@ const App = () => {
         <Route path="/signin" component={SignIn} />
         <ProtectedRoute path="/add-plant" component={AddPlantPage} />
         <ProtectedRoute path="/garden" component={Garden} />
-        <ProtectedRoute path="/account" component={UserProfile} />
+        <ProtectedRoute path="/account" component={Account} />
       </AppWrapper>
     </Router>
   );

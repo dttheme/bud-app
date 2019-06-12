@@ -1,12 +1,22 @@
-import React, { useState, useContext } from "react";
-import { signInWithGoogle } from "../../../firebase";
-import { withRouter } from "react-router";
-import { UserContext } from "../../../providers/user.provider";
-import { PageHeading } from "../../atoms/page-header/page-header.component";
+import React, { useContext, useState } from "react";
 import styles from "./sign-in.module.scss";
-import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
 import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
 import { Link } from "react-router-dom";
+import { PageHeading } from "../../atoms/page-header/page-header.component";
+import {
+  PageWrapper,
+  pottedHerbs
+} from "../../templates/page-wrapper/page-wrapper.component";
+import { signInWithGoogle } from "../../../firebase";
+import { UserContext } from "../../../providers/user.provider";
+import { withRouter } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { Button } from "../../atoms/button/button.component";
+library.add(faGoogle);
+const google = icon({ prefix: "fab", iconName: "google" });
 
 export const SignIn = withRouter(({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -35,9 +45,9 @@ export const SignIn = withRouter(({ history }) => {
   };
 
   return (
-    <PageWrapper>
+    <PageWrapper backgroundImage={pottedHerbs}>
       <ContentWrapper>
-        <form className="SignIn" onSubmit={handleUserSubmit}>
+        <form onSubmit={handleUserSubmit}>
           <PageHeading title="Sign In" />
           <input
             type="email"
@@ -53,11 +63,13 @@ export const SignIn = withRouter(({ history }) => {
             value={user.password}
             onChange={handleChange}
           />
-          <input type="submit" value="Sign In" />
+          <Button type="submit">SignIn</Button>
         </form>
-        <button className={styles.googleSignIn} onClick={handleGoogleSubmit}>
-          Sign In With Google
-        </button>
+        <Button className={styles.googleSignIn} onClick={handleGoogleSubmit}>
+          Sign In With{" "}
+          <FontAwesomeIcon icon={google} className={styles.googleIcon} />
+          Google
+        </Button>
         <div>
           Don't have an account?{" "}
           <Link to="/signin" style={{ color: "green" }}>

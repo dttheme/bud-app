@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import styles from "./weather.module.scss";
+import { UserContext } from "../../../providers/user.provider";
 
 const zipCode = 30312;
 
@@ -14,6 +15,8 @@ export const Weather = () => {
   const [responseData, setResponseData] = useState<
     ResponseDataType | undefined
   >(undefined);
+
+  const user = useContext(UserContext).user;
   const GET_WEATHER = zipCode => {
     axios({
       method: "get",
@@ -39,7 +42,7 @@ export const Weather = () => {
     GET_WEATHER(zipCode);
   }, []);
   let setDays = new Set();
-  return (
+  return user !== null ? (
     <div>
       <div>How's the weather in {responseData && responseData.city}?</div>
       {responseData &&
@@ -65,17 +68,17 @@ export const Weather = () => {
               <span>
                 {weatherEvent.weather[0].main} -{" "}
                 {weatherEvent.weather[0].description}
-                <img
+                {/* <img
                   className={styles.weatherIcon}
                   src={`http://openweathermap.org/img/w/${
                     weatherEvent.weather[0].icon
                   }.png`}
                   alt=""
-                />
+                /> */}
               </span>
             </div>
           );
         })}
     </div>
-  );
+  ) : null;
 };

@@ -2,24 +2,16 @@
 @import "../../../styles/media_queries";
 
 .contentWrapper {
-  align-self: center;
-  justify-content: center;
   margin: auto;
-  padding: 5px 0 15px 0;
+  padding: 30px;
   background-color: rgba($light, 0.95);
   border: solid 1px $green;
   border-radius: 5px;
-  width: 90%;
 }
 
 @include for-phone-only {
   .contentWrapper {
+    padding: 5px;
     margin: 20px;
-  }
-}
-
-@include for-tablet-landscape-up {
-  .contentWrapper {
-    width: 70%;
   }
 }

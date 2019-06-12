@@ -3,17 +3,22 @@ import { auth, createUserProfileDocument } from "../../../firebase";
 import { withRouter } from "react-router";
 import { PageHeading } from "../../atoms/page-header/page-header.component";
 import styles from "./sign-up.module.scss";
-import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
+import {
+  PageWrapper,
+  elephantEar
+} from "../../templates/page-wrapper/page-wrapper.component";
 import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
 import { Link } from "react-router-dom";
-import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
+import { ErrorBoundary } from "../../templates/error/error.component";
 
 export const SignUp = withRouter(({ history }) => {
   const [signUp, setSignUp] = useState({
     display_name: "",
     email: "",
-    password: ""
+    password: "",
+    zipCode: ""
   });
+  const [error, setError] = useState(undefined);
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -29,39 +34,52 @@ export const SignUp = withRouter(({ history }) => {
         signUp.password
       );
 
-      createUserProfileDocument(user, { displayName: signUp.display_name });
+      createUserProfileDocument(user, {
+        displayName: signUp.display_name,
+        zipCode: signUp.zipCode
+      });
       console.log(signUp.display_name);
     } catch (error) {
-      console.log(error);
+      setError(error);
       // callback function here to display login error component
       // code: 'auth/invalid-email'
     }
     setSignUp({
       display_name: "",
       email: "",
-      password: ""
+      password: "",
+      zipCode: ""
     });
     await history.push("/add-plant");
     console.log("success!");
   };
 
   return (
-    <PageWrapper>
+    <PageWrapper backgroundImage={elephantEar}>
       <ContentWrapper>
         <form onSubmit={handleSubmit}>
           <PageHeading title="Sign Up" />
-          <input
-            type="text"
-            name="display_name"
-            placeholder="Display Name"
-            value={signUp.display_name}
-            onChange={handleChange}
-          />
+          <ErrorBoundary message="">
+            <input
+              type="text"
+              name="display_name"
+              placeholder="Display Name"
+              value={signUp.display_name}
+              onChange={handleChange}
+            />
+          </ErrorBoundary>
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={signUp.email}
+            onChange={handleChange}
+          />
+          <input
+            type="number"
+            name="zipCode"
+            placeholder="Zip Code"
+            value={signUp.zipCode}
             onChange={handleChange}
           />
           <input

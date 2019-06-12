@@ -2,24 +2,33 @@
 @import "../../../styles/font_styles";
 
 .buttonComponent {
-  width: 70%;
-  max-width: 300px;
-  background-color: $yellow;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 5px 5px 2px $light;
-  font-size: medium;
+  font-family: $copyFont;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  color: $red;
-  padding: 10px 20px;
-  margin: 20px 0;
-  transition: all 1s;
+  letter-spacing: 1px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid $green;
+  border-radius: 5px;
+  background-size: 100% 200%;
+  background-image: linear-gradient(to top, $green 50%, $light 50%);
+  color: $dark;
+  transition: background-position ease-out 0.4s;
+  padding: 20px;
+  margin: 2px;
+  cursor: pointer;
+  .small {
+    font-size: $small;
+  }
+  .large {
+    font-size: $large;
+  }
 }
 
 .buttonComponent:hover,
 .buttonComponent:active {
-  // box-shadow: 2px 2px 2px $light;
-  color: $yellow;
-  background-color: $red;
+  background-position: 0 100%;
+  color: $light;
+  .red {
+    background-color: red;
+  }
 }

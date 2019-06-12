@@ -78,7 +78,9 @@ export const PlantTile = ({ type, gardenId, plants }: PlantTileProps) => {
           )}
           <Button>More Info</Button>
           {type === "search" ? null : (
-            <Button onClick={deleteFromGarden}>Delete</Button>
+            <Button onClick={deleteFromGarden} color="red">
+              Delete
+            </Button>
           )}
         </div>
       )}

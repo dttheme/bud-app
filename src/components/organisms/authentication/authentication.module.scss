@@ -2,15 +2,8 @@
 @import "../../../styles/font_styles";
 .signWrapper {
   width: 70%;
-  height: 20%;
-  margin-top: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  border: 1px solid $red;
-  padding: 10px;
-  border-radius: 5px;
   hr {
     width: 100%;
+    margin: 20px 0;
   }
 }

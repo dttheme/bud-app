@@ -6,7 +6,7 @@ import { UserDataType } from "../../../providers/garden.provider";
 import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
 import { PageHeading } from "../../atoms/page-header/page-header.component";
 
-export const UserProfile = () => {
+export const Account = () => {
   const [displayName, setDisplayName] = useState("");
   const imageRef = useRef<HTMLInputElement>(null);
 

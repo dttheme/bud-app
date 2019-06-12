@@ -32,7 +32,11 @@ export const ActiveUser = (user: UserDataType) => {
         ) : null}
         <div className={styles.displayName}>{user && user.displayName}</div>
       </div>
-      <Button className={styles.signOutButton} onClick={handleSignOut}>
+      <Button
+        className={styles.signOutButton}
+        onClick={handleSignOut}
+        size="small"
+      >
         Sign Out
       </Button>
     </div>

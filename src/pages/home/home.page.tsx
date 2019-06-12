@@ -1,11 +1,14 @@
 import * as React from "react";
 import { PageHeading } from "../../components/atoms/page-header/page-header.component";
 import styles from "./home.module.scss";
-import { PageWrapper } from "../../components/templates/page-wrapper/page-wrapper.component";
+import {
+  PageWrapper,
+  pottedPlant
+} from "../../components/templates/page-wrapper/page-wrapper.component";
 import { ContentWrapper } from "../../components/templates/content-wrapper/content-wrapper.component";
 
 export const Home = () => (
-  <PageWrapper>
+  <PageWrapper backgroundImage={pottedPlant}>
     <div className={styles.homePageWrapper}>
       <ContentWrapper>
         <p className={styles.homePageContent}>
