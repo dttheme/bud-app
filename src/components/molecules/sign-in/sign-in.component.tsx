@@ -10,13 +10,9 @@ import {
 import { signInWithGoogle } from "../../../firebase";
 import { UserContext } from "../../../providers/user.provider";
 import { withRouter } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Button } from "../../atoms/button/button.component";
-library.add(faGoogle);
-const google = icon({ prefix: "fab", iconName: "google" });
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { google } from "../../../utilities/font-awesome-library";
 
 export const SignIn = withRouter(({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -55,6 +51,7 @@ export const SignIn = withRouter(({ history }) => {
             placeholder="Email"
             value={user.email}
             onChange={handleChange}
+            required
           />
           <input
             type="password"
@@ -62,20 +59,21 @@ export const SignIn = withRouter(({ history }) => {
             placeholder="Password"
             value={user.password}
             onChange={handleChange}
+            required
           />
-          <Button type="submit">SignIn</Button>
+          <Button type="submit">Sign In</Button>
         </form>
         <Button className={styles.googleSignIn} onClick={handleGoogleSubmit}>
           Sign In With{" "}
           <FontAwesomeIcon icon={google} className={styles.googleIcon} />
           Google
         </Button>
-        <div>
+        <p>
           Don't have an account?{" "}
           <Link to="/signin" style={{ color: "green" }}>
             Sign up.
           </Link>
-        </div>
+        </p>
       </ContentWrapper>
     </PageWrapper>
   );

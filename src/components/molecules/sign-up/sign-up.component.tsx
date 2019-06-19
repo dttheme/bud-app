@@ -56,31 +56,17 @@ export const SignUp = withRouter(({ history }) => {
 
   return (
     <PageWrapper backgroundImage={elephantEar}>
-      <ContentWrapper>
+      <ContentWrapper className={styles.signUp}>
         <form onSubmit={handleSubmit}>
           <PageHeading title="Sign Up" />
-          <ErrorBoundary message="">
-            <input
-              type="text"
-              name="display_name"
-              placeholder="Display Name"
-              value={signUp.display_name}
-              onChange={handleChange}
-            />
-          </ErrorBoundary>
+
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={signUp.email}
             onChange={handleChange}
-          />
-          <input
-            type="number"
-            name="zipCode"
-            placeholder="Zip Code"
-            value={signUp.zipCode}
-            onChange={handleChange}
+            required
           />
           <input
             type="password"
@@ -88,15 +74,32 @@ export const SignUp = withRouter(({ history }) => {
             placeholder="Password"
             value={signUp.password}
             onChange={handleChange}
+            required
+          />
+          {/* <ErrorBoundary message=""> */}
+          <input
+            type="text"
+            name="display_name"
+            placeholder="Display Name"
+            value={signUp.display_name}
+            onChange={handleChange}
+          />
+          {/* </ErrorBoundary> */}
+          <input
+            type="number"
+            name="zipCode"
+            placeholder="Zip Code"
+            value={signUp.zipCode}
+            onChange={handleChange}
           />
           <input type="submit" value="Sign Up" />
         </form>
-        <div>
+        <p>
           Got a Google account?{" "}
           <Link to="/signin" style={{ color: "green" }}>
             Sign in.
           </Link>
-        </div>
+        </p>
       </ContentWrapper>
     </PageWrapper>
   );

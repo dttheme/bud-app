@@ -51,7 +51,6 @@ export const Weather = () => {
             "en-US",
             {
               weekday: "short",
-              // year: "numeric",
               month: "short",
               day: "numeric",
               hour: "numeric"
@@ -59,9 +58,12 @@ export const Weather = () => {
           );
           const dayOfTheWeek = date.slice(0, 3);
           setDays.add(dayOfTheWeek);
-          console.log(setDays.has(dayOfTheWeek));
+          console.log(setDays);
           return (
             <div key={weatherEvent.dt} className={styles.weatherEventWrapper}>
+              {setDays.forEach(day => (
+                <span>{day}</span>
+              ))}
               {setDays[dayOfTheWeek] ? null : (
                 <span className={styles.date}>{date}</span>
               )}

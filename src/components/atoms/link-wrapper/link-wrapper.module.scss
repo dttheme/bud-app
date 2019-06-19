@@ -1,9 +1,9 @@
 @import "../../../styles/colors";
 @import "../../../styles/font_styles";
 .linkWrapper {
-  font-size: $smedium;
-  font-family: $copyFont;
-  text-decoration: none;
   color: $green;
-  text-shadow: 2px 2px 1px $yellow;
+}
+.linkWrapper:hover {
+  color: $yellow;
+  text-decoration: none;
 }

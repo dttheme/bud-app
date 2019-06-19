@@ -5,6 +5,7 @@ import { UserContext } from "../../../providers/user.provider";
 import { Weather } from "../weather/weather.component";
 import { Authentication } from "../authentication/authentication.component";
 import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
   <Link
@@ -12,9 +13,7 @@ const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
     style={{ textDecoration: "none" }}
     className={styles.authLink}
   >
-    <span aria-label={ariaLabel}>
-      <LinkWrapper>{content}</LinkWrapper>
-    </span>
+    <span aria-label={ariaLabel}>{content}</span>
   </Link>
 );
 
@@ -37,10 +36,17 @@ export const Header = () => {
         />
         <h1>Sprout Bud</h1>
       </Link>
+      <p className={styles.headerAlert}>
+        <FontAwesomeIcon icon={"exclamation-circle"} /> Sprout Bud is still in
+        development! Please visit my{" "}
+        <LinkWrapper href="https://trello.com/b/7ciW8leI/bud-app">
+          Trello
+        </LinkWrapper>{" "}
+        for this project to see what's being developed next!
+      </p>
       <Authentication />
       <Weather />
       {user !== null ? (
-        // <div>
         <span className={styles.headerLinks}>
           {/* <AuthenticatedLinks
             endpoint="/add-plant"
