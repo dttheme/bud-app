@@ -18,18 +18,19 @@ export const signOut = () => {
 
 export const createUserProfileDocument = async (user, additionalData?) => {
   if (!user) return;
+  console.log(user);
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
-    const { displayName, email, photoUrl, zipCode } = user;
+    const { displayName, email, photoURL, zipCode } = user;
     const createdAt = new Date();
     try {
       await userRef.set({
         displayName,
         email,
-        photoUrl,
+        photoURL,
         createdAt,
-        zipCode,
+        // zipCode,
         ...additionalData
       });
     } catch (error) {

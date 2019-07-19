@@ -61,9 +61,9 @@ export const Weather = () => {
           console.log(setDays);
           return (
             <div key={weatherEvent.dt} className={styles.weatherEventWrapper}>
-              {setDays.forEach(day => (
+              {/* {setDays.forEach(day => (
                 <span>{day}</span>
-              ))}
+              ))} */}
               {setDays[dayOfTheWeek] ? null : (
                 <span className={styles.date}>{date}</span>
               )}

@@ -4,13 +4,11 @@ import { DbPlantSearch } from "../../organisms/add-db-plant/add-db-plant.compone
 import { UserContext } from "../../../providers/user.provider";
 
 export const pottedHerbs = "images/carolyn-v-1456621-unsplash.webp",
-  leafMacroOne = "images/becca-lavin-564568-unsplash.webp",
-  leafMacroTwo = "images/nicolas-thomas-550343-unsplash.webp",
   succulentMacro = "images/annie-spratt-42051-unsplash_edit.webp",
   potsOnWall = "images/adrien-olichon-1626567-unsplash.webp",
   greenhouse = "images/abigail-lynn-423971-unsplash.webp",
   pottedPlant = "images/lauren-mancke-60547-unsplash.webp",
-  tomatoGarden = "images/www-zanda-photography-518892-unsplash.jpeg",
+  tomatoGarden = "images/www-zanda-photography-518892-unsplash.jpg",
   elephantEar = "images/sylvie-tittel-673967-unsplash.webp";
 
 // var backgroundArray = [

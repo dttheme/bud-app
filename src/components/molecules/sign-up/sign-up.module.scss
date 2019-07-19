@@ -1,8 +1,13 @@
+@import "../../../styles/colors";
 .signUp {
   width: 50%;
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .errorMessage {
+    color: $red;
+    padding: 0 0 20px 0;
   }
 }

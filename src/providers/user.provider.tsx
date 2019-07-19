@@ -14,7 +14,7 @@ export type UserDataType = {
   uid: string;
   displayName: string;
   email: string;
-  photoUrl?: string;
+  photoURL?: string;
 };
 
 export type AuthStateType = {
@@ -51,7 +51,7 @@ export const UserProvider = props => {
         console.log("Loading...");
         return { isLoading: true, ...prevState };
       });
-      // console.log(authentication);
+      console.log(authentication);
       if (authState) {
         userRef = await createUserProfileDocument(authState);
         userRef.onSnapshot(snapshot => {
@@ -65,7 +65,6 @@ export const UserProvider = props => {
             isLoggedIn: true
           });
         });
-      } else {
       }
     });
     return () =>

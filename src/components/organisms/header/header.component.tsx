@@ -6,6 +6,7 @@ import { Weather } from "../weather/weather.component";
 import { Authentication } from "../authentication/authentication.component";
 import { LinkWrapper } from "../../atoms/link-wrapper/link-wrapper.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "../../atoms/button/button.component";
 
 const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
   <Link
@@ -13,7 +14,7 @@ const AuthenticatedLinks = ({ endpoint, toolipText, ariaLabel, content }) => (
     style={{ textDecoration: "none" }}
     className={styles.authLink}
   >
-    <span aria-label={ariaLabel}>{content}</span>
+    <Button aria-label={ariaLabel}>{content}</Button>
   </Link>
 );
 
@@ -45,7 +46,7 @@ export const Header = () => {
         for this project to see what's being developed next!
       </p>
       <Authentication />
-      <Weather />
+      {/* <Weather /> */}
       {user !== null ? (
         <span className={styles.headerLinks}>
           {/* <AuthenticatedLinks

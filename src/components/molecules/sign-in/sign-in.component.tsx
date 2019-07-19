@@ -17,6 +17,7 @@ import { google } from "../../../utilities/font-awesome-library";
 export const SignIn = withRouter(({ history }) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const setAuthState = useContext(UserContext).setAuthState;
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -24,12 +25,16 @@ export const SignIn = withRouter(({ history }) => {
   };
 
   const handleUserSubmit = event => {
-    event.preventDefault();
-    setUser({ email: "", password: "" });
-    setAuthState(prevState => {
-      return { ...prevState, isLoggedIn: true };
-    });
-    history.push("/garden");
+    try {
+      event.preventDefault();
+      setUser({ email: "", password: "" });
+      setAuthState(prevState => {
+        return { ...prevState, isLoggedIn: true };
+      });
+      history.push("/garden");
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   const handleGoogleSubmit = async () => {
@@ -45,6 +50,11 @@ export const SignIn = withRouter(({ history }) => {
       <ContentWrapper>
         <form onSubmit={handleUserSubmit}>
           <PageHeading title="Sign In" />
+          {errorMessage ? (
+            <div className={styles.errorMessage}>{errorMessage}</div>
+          ) : (
+            ""
+          )}
           <input
             type="email"
             name="email"

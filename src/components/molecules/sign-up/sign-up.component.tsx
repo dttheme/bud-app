@@ -9,7 +9,7 @@ import {
 } from "../../templates/page-wrapper/page-wrapper.component";
 import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
 import { Link } from "react-router-dom";
-import { ErrorBoundary } from "../../templates/error/error.component";
+// import { ErrorBoundary } from "../../templates/error/error.component";
 
 export const SignUp = withRouter(({ history }) => {
   const [signUp, setSignUp] = useState({
@@ -18,7 +18,7 @@ export const SignUp = withRouter(({ history }) => {
     password: "",
     zipCode: ""
   });
-  const [error, setError] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -38,11 +38,9 @@ export const SignUp = withRouter(({ history }) => {
         displayName: signUp.display_name,
         zipCode: signUp.zipCode
       });
-      console.log(signUp.display_name);
+      await history.push("/add-plant");
     } catch (error) {
-      setError(error);
-      // callback function here to display login error component
-      // code: 'auth/invalid-email'
+      setErrorMessage(error.message);
     }
     setSignUp({
       display_name: "",
@@ -50,8 +48,6 @@ export const SignUp = withRouter(({ history }) => {
       password: "",
       zipCode: ""
     });
-    await history.push("/add-plant");
-    console.log("success!");
   };
 
   return (
@@ -59,7 +55,11 @@ export const SignUp = withRouter(({ history }) => {
       <ContentWrapper className={styles.signUp}>
         <form onSubmit={handleSubmit}>
           <PageHeading title="Sign Up" />
-
+          {errorMessage ? (
+            <div className={styles.errorMessage}>{errorMessage}</div>
+          ) : (
+            ""
+          )}
           <input
             type="email"
             name="email"
@@ -76,7 +76,6 @@ export const SignUp = withRouter(({ history }) => {
             onChange={handleChange}
             required
           />
-          {/* <ErrorBoundary message=""> */}
           <input
             type="text"
             name="display_name"
@@ -84,7 +83,6 @@ export const SignUp = withRouter(({ history }) => {
             value={signUp.display_name}
             onChange={handleChange}
           />
-          {/* </ErrorBoundary> */}
           <input
             type="number"
             name="zipCode"

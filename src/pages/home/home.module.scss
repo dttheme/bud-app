@@ -2,12 +2,12 @@
 @import "../../styles/font_styles";
 
 .homePageWrapper {
-  // background: url("../../images/annie-spratt-42051-unsplash_edit.jpg") no-repeat;
   background-size: cover;
   height: 100%;
   width: 100%;
   min-width: 100%;
   display: flex;
+  padding: 30px;
 }
 .homePageContent {
   align-content: center;

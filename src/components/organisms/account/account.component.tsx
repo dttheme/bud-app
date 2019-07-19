@@ -1,6 +1,10 @@
 import React, { useContext, useRef, useState } from "react";
+import "./account.module.scss";
 import { firestore, storage } from "../../../firebase";
-import { PageWrapper } from "../../templates/page-wrapper/page-wrapper.component";
+import {
+  PageWrapper,
+  succulentMacro
+} from "../../templates/page-wrapper/page-wrapper.component";
 import { UserContext } from "../../../providers/user.provider";
 import { UserDataType } from "../../../providers/garden.provider";
 import { ContentWrapper } from "../../templates/content-wrapper/content-wrapper.component";
@@ -21,30 +25,33 @@ export const Account = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (displayName) {
-      userRef.update({
-        displayName
-      });
-    }
-    const inputImage =
-      imageRef &&
-      imageRef.current &&
-      imageRef.current.files &&
-      imageRef.current.files[0];
-
-    if (inputImage) {
-      storage
-        .ref()
-        .child("user-profiles")
-        .child(user.uid)
-        .child(inputImage.name)
-        .put(inputImage)
-        .then(response => response.ref.getDownloadURL())
-        .then(photoUrl => userRef.update({ photoUrl }));
+    try {
+      if (displayName) {
+        userRef.update({
+          displayName
+        });
+      }
+      const inputImage =
+        imageRef &&
+        imageRef.current &&
+        imageRef.current.files &&
+        imageRef.current.files[0];
+      if (inputImage) {
+        storage
+          .ref()
+          .child("user-profiles")
+          .child(user.uid)
+          .child(inputImage.name)
+          .put(inputImage)
+          .then(response => response.ref.getDownloadURL())
+          .then(photoURL => userRef.update({ photoURL }));
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
-    <PageWrapper>
+    <PageWrapper backgroundImage={succulentMacro}>
       <ContentWrapper>
         <PageHeading title="Account" />
         <form onSubmit={handleSubmit}>

@@ -4,11 +4,6 @@ import { UserDataType, UserContext } from "../../../providers/user.provider";
 import styles from "./active-user.module.scss";
 import { Button } from "../../atoms/button/button.component";
 
-// type ActiveUserType = {
-//   user: UserDataType;
-//   isUserSignedIn: Function;
-// };
-
 export const ActiveUser = (user: UserDataType) => {
   let setAuthState = useContext(UserContext).setAuthState;
 
@@ -21,10 +16,10 @@ export const ActiveUser = (user: UserDataType) => {
   return (
     <div className={styles.activeUserWrapper}>
       <div className={styles.activeUserContent}>
-        {user && user.photoUrl ? (
+        {user && user.photoURL ? (
           <div className={styles.activeUserImageWrapper}>
             <img
-              src={user.photoUrl}
+              src={user.photoURL}
               className={styles.activeUserImage}
               alt={`${user.displayName} Account Image`}
             />

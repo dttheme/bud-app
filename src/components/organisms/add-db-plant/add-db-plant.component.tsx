@@ -4,7 +4,6 @@ import styles from "./add-db-plant.module.scss";
 import { Button } from "../../atoms/button/button.component";
 import { IconWrapper } from "../../atoms/icon-wrapper/icon-wrapper.component";
 import { PlantList } from "../../templates/plant-list/plant-list.component";
-import { UserContext } from "../../../providers/user.provider";
 import { Pagination } from "../../molecules/pagination/pagination.component";
 
 const SorryNotFound = ({ tryAgain }) => (
@@ -20,7 +19,6 @@ export const DbPlantSearch = () => {
   const [responseData, setResponseData] = useState([]);
   const [pageNum, setPageNum] = useState(0);
   const [searchResultsLoaded, setSearchResultsLoaded] = useState(false);
-  const user = useContext(UserContext);
 
   const GET_PLANTS = (value: string) => {
     const currentPage = pageNum >= 1 ? pageNum : "";
@@ -68,44 +66,40 @@ export const DbPlantSearch = () => {
   return (
     <div className={styles.dbResults}>
       <form>
-        {searchResultsLoaded ? null : (
-          <div className={styles.searchBar}>
-            <input
-              placeholder="Search plant database..."
-              type="text"
-              name="search input"
-              value={queryString}
-              onChange={e => handleInputChange(e.target.value)}
-            />
-            <Button
-              className={styles.searchButton}
-              type="submit"
-              onClick={handleSearchClick(queryString)}
-            >
-              Search
-            </Button>
-          </div>
-        )}
+        <div className={styles.searchBar}>
+          <input
+            placeholder="Search plant database..."
+            type="text"
+            name="search input"
+            value={queryString}
+            onChange={e => handleInputChange(e.target.value)}
+          />
+          <Button
+            className={styles.searchButton}
+            type="submit"
+            onClick={handleSearchClick(queryString)}
+          >
+            Search
+          </Button>
+        </div>
       </form>
       {isLoading ? (
         <IconWrapper ariaLabel="Loading results...">
           <div className={styles.loadingFlower}>🌼</div>
         </IconWrapper>
-      ) : (
+      ) : null}
+      {searchResultsLoaded && responseData.length !== 0 ? (
         <div className={styles.plantListWrapper}>
-          {searchResultsLoaded && responseData.length == 0
-            ? SorryNotFound({ tryAgain })
-            : PlantList({
-                plantDataArray: responseData,
-                type: "search"
-              })}
+          <PlantList plantDataArray={responseData} type="search" />{" "}
+          <Pagination
+            handlePaginationClick={handlePaginationClick}
+            pageNum={pageNum}
+            responseDataLength={responseData.length}
+          />
         </div>
-      )}
-      <Pagination
-        handlePaginationClick={handlePaginationClick}
-        pageNum={pageNum}
-        responseDataLength={responseData.length}
-      />
+      ) : searchResultsLoaded && responseData.length == 0 ? (
+        SorryNotFound({ tryAgain })
+      ) : null}
     </div>
   );
 };

@@ -9,6 +9,7 @@ import {
   PlantDataType
 } from "../../../providers/garden.provider";
 import { UserContext } from "../../../providers/user.provider";
+import { Tooltip } from "../../atoms/tooltip/tooltip.component";
 
 type PlantTileProps = {
   type: "search" | "garden";
@@ -23,6 +24,7 @@ const AddedToGardenSuccessMessage = () => (
 
 export const PlantTile = ({ type, gardenId, plants }: PlantTileProps) => {
   const [addedToGarden, setAddedToGarden] = useState(false);
+  const [adding, setAdding] = useState(false);
   const { uid = "", displayName = "", email = "" } = auth.currentUser || {};
   const authState = useContext(UserContext);
 
@@ -41,19 +43,21 @@ export const PlantTile = ({ type, gardenId, plants }: PlantTileProps) => {
   }
 
   const addToGarden = async () => {
-    console.log(plants, authState);
-    await firestore
-      .collection("garden")
-      .doc(gardenId)
-      .set({ user: { uid, display_name: displayName, email } });
-
-    await firestore
-      .collection("garden")
-      .doc(gardenId)
+    // add user data
+    let userProm = plantRef.set({
+      user: { uid, display_name: displayName, email }
+    });
+    // add plant data w/ user data
+    let plantProm = plantRef
       .collection("plants")
       .add({ user: { uid, display_name: displayName, email }, plants });
 
-    setAddedToGarden(true);
+    try {
+      Promise.all([userProm, plantProm]);
+      setAddedToGarden(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const tile = (
@@ -76,7 +80,9 @@ export const PlantTile = ({ type, gardenId, plants }: PlantTileProps) => {
           {type === "garden" ? null : (
             <Button onClick={addToGarden}>Add To Garden</Button>
           )}
-          <Button>More Info</Button>
+
+          {/* <Button>More Info</Button> */}
+
           {type === "search" ? null : (
             <Button onClick={deleteFromGarden} color="red">
               Delete
