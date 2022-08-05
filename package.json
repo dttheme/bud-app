@@ -21,7 +21,7 @@
     "firebase": "^5.9.2",
     "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0",
-    "mongoose": "^5.4.22",
+    "mongoose": "^5.7.5",
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.10",
     "normalize.css": "^8.0.1",
